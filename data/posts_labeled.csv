@@ -1,0 +1,1706 @@
+id,title,text,score,label,split,prelabeled_by_ai
+1u0fv7u,STOP racist posts about Chinese researchers [D],"Edit: the original post targeting Chinese researchers is removed by the mods. Points made here are responding to that particular post. So when you leave comments to this post, please do realize that there's particular context that's not available now. Sorry for any confusion.
+
+Although the original post I'm calling out is taken down, I do think it's an important topic, and choose to keep my post unchanged.
+
+============
+
+Yes, I'm calling it out. It IS racism.  As an active member of r/MachineLearning and a researcher who is ethnic Chinese, I am DISGUSTED by unfounded accusations against the group of researchers who constitute over half of the field. Such posts pop up every other week,  grounded in conspiracy theories, and creating a sinophobia echo chamber.
+
+I understand the salty feeling when one's paper is rejected, no matter whether the paper actually deserves acceptance or not. Given the noise in conference organization and reviewing process, and a relatively junior body of partici",436,discussion,,True
+1u23f8p,Anthropic's new model Fable will silently handicap work on LLMs [D],"Seems like they have engineered some specific limitations that are widely cited as follows:
+
+&gt; In light of the ability of recent models to accelerate their own development, we’ve implemented new interventions that limit Claude’s effectiveness for requests targeting frontier LLM development (for example, on building pretraining pipelines, distributed training infrastructure, or ML accelerator design). Using Claude to develop competing models already violates our Terms of Service, but enforcing this restriction through our safeguards avoids accelerating the actors most willing to violate these terms.
+
+&gt; Unlike our interventions for cybersecurity, biology and chemistry, and distillation attempts, these safeguards will not be visible to the user. Fable 5 will not fall back to a different model. Instead, the safeguards will limit effectiveness through methods such as prompt modification, steering vectors, or parameter-efficient fine-tuning (PEFT). These interventions will not affect t",390,analysis,,True
+1tpaw6x,AI-generated CUDA kernels silently break training and inference [R],"Last month NVIDIA released [SOL-ExecBench](https://research.nvidia.com/benchmarks/sol-execbench), a new benchmark of 235 production CUDA kernels lifted from DeepSeek, Qwen, Gemma, and Kimi. We took several top-ranked AI-generated submissions and tried using them in production workloads. Many of them broke, sometimes in surprising ways.
+
+One of those kernels is the fused embedding-gradient + RMSNorm backward pass, which runs at the end of every transformer training step. We took the fastest submission on the benchmark for it, and dropped it into the training loop of a small transformer. The kernel had passed the benchmark's verifier with room to spare. But in our training run, the loss diverged and never recovered.
+
+We started debugging. Replace the dataset distribution with uniformly sampled tokens, the divergence vanishes. Swap SGD for AdamW, also vanishes.
+
+This is the worst kind of bug for research. Symptoms and masks both look exactly like ""the idea didn't work"". It's the type of b",268,analysis,,True
+1u2tk0i,"Anthropic walks back policy on silent nerfing for AI/ML, will notify users [N]","From Wired:
+
+&gt; “We’re changing Fable 5’s safeguards for frontier LLM development to make them visible.” Anthropic said in a statement to WIRED. “We made the wrong tradeoff and we apologize for not getting the balance right.”
+
+&gt; Anthropic now says it’s changing course, and that Claude Fable 5’s safeguards for AI development will be visible to users. If the company suspects a user is trying to use Claude to build a highly capable AI it will alert them that it’s either refusing the request, or rerouting the user to a less capable model.
+
+Full article: https://www.wired.com/story/anthropic-responds-to-backlash-on-claudes-secret-sabotage-on-ai-research/",263,announcement,,True
+1u6mn3q,"AI language models have favorite names, and we mapped them [R]","It turns out LLMs have strong priors over character names that are model-specific and version-specific. If you find Elena Vasquez and Marcus Chen together on a website, there's a good chance Claude generated it.
+
+We stumbled on this as a side finding while working on a model diffing method (CDD), and it grew into its own paper. The short version: these names travel as correlated ensembles, appear across dozens of websites as volcano experts, podcast hosts, thriller protagonists, and authors of 1000+ papers published in two months.
+
+Then we found a third name in the ensemble. The collage in the comments shows three different websites independently hallucinating the same trio with AI stock photo faces.
+
+Preprint: https://arxiv.org/abs/2606.02184",196,analysis,,True
+1u1wq0a,Introducing Papers Without Code [P],"Hi, Niels here from the open-source team at Hugging Face.
+
+I've recently relaunched [paperswithcode.co](http://paperswithcode.co) as a source for finding the state of the art (SOTA) across various AI domains, from 3D generation to AI agents. This is done by automatically parsing research papers published on arXiv/Hugging Face, enabling leaderboards to be created. See [BrowseComp](https://paperswithcode.co/benchmark/browsecomp?task=agents) below as an example (a scatter plot and a table are available for each benchmark).
+
+\- Scatter plot (you can hover over the dots to see the models):
+
+https://preview.redd.it/9rz2r3ffcf6h1.png?width=2880&amp;format=png&amp;auto=webp&amp;s=b3f8e7a870802f6ef8227ecc0619e9e1057554b0
+
+\- Table:
+
+https://preview.redd.it/qoqriddw5f6h1.png?width=2862&amp;format=png&amp;auto=webp&amp;s=a0034574f693847537037013672fb61daf27b16e
+
+As you can see, I've added support for viewing evals for closed-source models, too, given that many benchmarks are nowadays dominated by",154,announcement,,True
+1tmawv5,PapersWithCode new features - week 1 [P],"Hi,
+
+  
+Niels here from the open-source team at Hugging Face. It's been one week since I [launched](https://www.reddit.com/r/MachineLearning/comments/1tgmwqr/reviving_paperswithcode_by_hugging_face_p/) [paperswithcode.co](http://paperswithcode.co), a revival of the website we all loved. It allows us to keep track of the state-of-the-art (SOTA) across various domains of AI, from agents to computer vision and time-series forecasting.
+
+The reception has been great, and I'm excited to extend this over the next few months.
+
+This week, I've added the following features:
+
+\- Support for multiple metrics for a given benchmark: leaderboards now support multiple metrics, see e.g., the [Open ASR Leaderboard](https://paperswithcode.co/benchmark/open-asr-leaderboard) for automatic speech recognition, which supports both Word Error Rate (WER) and the Inverse Real-Time Factor (RTFx) metrics, or the [Object Detection leaderboard](https://paperswithcode.co/benchmark/coco-val2017), which now also report",150,announcement,,True
+1uazlnd,"Hi Reddit, I posted my Build Your Own LLM workshop to Youtube teaching ML, LLM and math intuition [P]","Hi internet friends, I recorded a workshop about building your own LLM without any math / ML prerequisites. It covers everything from machine learning fundamentals, deep neural networks, transformer architecture, and pre/post-training.
+
+The only prerequisite is being comfortable with learning through code &amp; excel examples.
+
+1. [**Sampling** Large Language Models](https://www.youtube.com/watch?v=vXiB0UdDhk8&amp;list=PLweJS2YZCfkeXXdfCKGaxAhm2w8p0u1z6)
+2. [**Reverse Engineering** Large Language Model](https://www.youtube.com/watch?v=E0rkgxwhz5g&amp;list=PLweJS2YZCfkeXXdfCKGaxAhm2w8p0u1z6)
+3. [**Perceptrons:** wx+b](https://www.youtube.com/watch?v=uaA8ChGcMwE&amp;list=PLweJS2YZCfkeXXdfCKGaxAhm2w8p0u1z6)
+4. [**Activation Functions:** ReLU, GELU, SwiGLU](https://www.youtube.com/watch?v=G5gkYVB-P-Q&amp;list=PLweJS2YZCfkeXXdfCKGaxAhm2w8p0u1z6)
+5. [**GPU Coding:** PyTorch, torch.compile(), fused kernels, CUDA, Triton](https://www.youtube.com/watch?v=VVk6N1_rFD0&amp;list=PLweJS2YZCfkeXXdfCK",149,announcement,,True
+1u84mio,Next-Latent Prediction Transformers [R],"[Microsoft Research Preprint](https://preview.redd.it/efm7zazr2t7h1.png?width=2950&amp;format=png&amp;auto=webp&amp;s=444dc71b22bca0c499f56367f705fb4ea23d07b8)
+
+Next-token prediction is myopic. What if transformers learn to predict their own next latent state?
+
+Microsoft Research present **Next-Latent Prediction (NextLat)**: a self-supervised learning method that teaches transformers to form compact world models for reasoning and planning. It also unlocks up to 3.3x faster inference via self-speculative decoding!
+
+On top of next-token prediction, NextLat trains the transformer to predict its own next latent state given the current latent state and next token.
+
+NextLat has a few key benefits:
+
+1. **Representation Learning**: NextLat encourages transformers to compress history into compact belief states.
+2. **Better Data Efficiency**: predicting in latent space provides denser supervision than predicting one-hot tokens.
+3. **Faster Inference**: via recursive multi-step lookahead.
+
+I'm su",143,announcement,,True
+1tq2vxa,"A new dataset with more that 100M hi-quality, curated images, with captions and meta data! [P]","Hello everyone.
+
+The new dataset is named MONET, is Apache 2.0 and available on HF:
+
+[https://huggingface.co/datasets/jasperai/monet](https://huggingface.co/datasets/jasperai/monet)
+
+**MONET is open, Apache 2.0-licensed image–text dataset. It was built from 2.9 billion images and refined to 104.9 million high-quality samples.**
+
+We are also publishing [a paper](https://arxiv.org/abs/2605.21272) that explains how the dataset was created if you are curious and 3 compagnions projects
+
+* [A umap to visualize the distribution](https://huggingface.co/spaces/jasperai/monet-umap)
+* [A retreival tool to do text or image search](https://huggingface.co/spaces/jasperai/monet-retrieval)
+* [A codebase to train T2i model based on MONET](https://github.com/gojasper/nano-t2i/tree/main)
+
+Hope this will be usefull!  
+",130,announcement,,True
+1tvwctd,NeurIPS used uncalibrated AI detector for desk rejections [D],"I recently had a submission desk-rejected from the NeurIPS 2026 Position Paper Track for an alleged AI-policy violation. After corresponding with the track leadership and reading their public blog post, I think the broader methodological issue is worth discussing here.
+
+The track used Pangram, a proprietary AI-text detector, as part of the desk-rejection process. I was told that the materials considered for desk rejection were:
+
+* the detector output
+* the authors’ AI-use attestation
+
+This creates a potential circularity problem. If a high detector score is used to judge the author’s attestation as inconsistent, and that inconsistency is then used to justify desk rejection, the detector is not just an aid. It becomes a decisive part of the adjudication process.
+
+The bigger issue is validation.
+
+The NeurIPS blog describes tests using Pangram audits, older ACM FAccT papers, synthetic AI-generated position papers, and manually edited samples. But the target population was NeurIPS 2026 Pos",115,analysis,,True
+1to2l4c,[D] Where do you go for serious AI research discussion online? [D],"Looking for communities where people actually dig into ML/AI research, not hype, not ""look what I built with an LLM API,"" but discussions about papers, training dynamics, debugging real models, infra problems, that kind of thing.
+
+I'm specifically interested in places where you can post something like ""I'm seeing X behaviour in my SSL training, here's the loss curve, anyone seen this before?"" and get thoughtful replies instead of generic advice.",107,discussion,,True
+1twmhud,On-policy distillation: one of the hottest terms on PapersWithCode [R],"Hi, Niels here from the open-source team at Hugging Face. At [paperswithcode.co](http://paperswithcode.co) I am trying to make it easier for people to learn about the newest techniques used across AI papers.
+
+  
+One of the hottest terms in AI research that I've recently added is [On-policy distillation](https://paperswithcode.co/methods/on-policy-distillation), also abbreviated as OPD. It's the key post-training behind models like Qwen 3.6 and 3.7, GLM-5.1, and DeepSeek-V4.
+
+https://preview.redd.it/yegq2gfag95h1.png?width=3046&amp;format=png&amp;auto=webp&amp;s=f68fdf3ca075f3c4e56051fdd0ebcf97be9bcbc9
+
+  
+On PapersWithCode, you can find the original paper that introduced it, learn more about the method itself, as well as all papers that cite or mention it. Sasha Rush (who used to be a colleague of mine at Hugging Face, now at Cursor) recently made an [excellent whiteboard explanation](https://x.com/dwarkesh_sp/status/2062353335529935114) of OPD with Dwarkesh. I've linked this video lec",101,announcement,,True
+1tr9fa1,How long does it realistically take for you to produce an ICML/NeurIPS/ICLR-level paper? [D],"Hey everyone,
+
+Since there are many researchers here who regularly publish at top-tier ML conferences like ICML, NeurIPS, and ICLR, I wanted to ask about realistic paper timelines.
+
+In your lab or research setting, how long does it usually take to develop a paper from the initial idea to a complete submission, and then eventually to final acceptance?",95,discussion,,True
+1uazlhg,Would you let an ML PhD student graduate without a top-tier paper? [D],"Suppose you’re a PhD advisor in machine learning.
+
+Your student has been in the program for 4 years, has done solid work, and has a coherent thesis direction but they haven’t published in an A\*ML venue or top journal. No NeurIPS/ICML/ICLR/CVPR/etc., and no equivalent top venue in their subfield either but 3 First author A level paper.
+
+Would you still support them graduating if the thesis itself is solid? ",88,discussion,,True
+1uatlzx,"DVD-JEPA: an open-source, fully-reproducible JEPA world model [P]","A paper currently trending on [paperswithcode.co](http://paperswithcode.co) in the ""Anomaly Detection"" category is [DVD-JEPA](https://paperswithcode.co/paper/98361).
+
+https://i.redd.it/r6fd8n3d4f8h1.gif
+
+Here is the short summary:
+
+Most attempts to learn a **world model** from video try to predict the next frame pixel-by-pixel, and drown in detail that is fundamentally unpredictable. **JEPA** (Joint-Embedding Predictive Architecture, [LeCun 2022](https://paperswithcode.co/paper/98584)) makes a different bet: predict the *representation* of the future, not the pixels, and let the encoder discard whatever it cannot predict.
+
+**DVD-JEPA** is the smallest honest demonstration of that idea we could build. The ""world"" is a DVD logo bouncing in a 16×16 box. A context encoder, an EMA target encoder, and a latent predictor are trained — with no labels and no decoder — to predict the next observation **in a 32-dimensional representation space**. We then show three things:
+
+1. **It learned the wo",84,announcement,,True
+1uark0u,Time Series Modeling Needs a Dynamical Systems Perspective [R],"In our [**#ICML2026**](https://www.linkedin.com/search/results/all/?keywords=%23icml2026&amp;origin=HASH_TAG_FROM_FEED) position paper we argue a **dynamical systems perspective** is needed to drive time series (TS) modeling forward: [https://arxiv.org/abs/2602.16864](https://arxiv.org/abs/2602.16864)  
+  
+Essentially all time series in nature and engineering come from some underlying dynamical system (DS), mostly chaotic for complex systems, and acknowledging this helps to address many open problems.  
+  
+**Dynamical systems reconstruction (DSR)** goes beyond mere forecasting and gives us an *understanding* of the dynamical rules that underlie observed time series. This in turn may enable true out-of-domain generalization and predicting a system’s *long-term* behavior, something current TS models cannot do. In the paper, we compare a variety of custom-trained and recent foundation models for TS and DSR w.r.t. short- &amp; long-term forecasting.  
+  
+Specifically, we suggest:  
+  
+1) *",85,analysis,,True
+1ttei2r,What’s the actual focus in World Models right now? [R],"Hey everyone, I'm trying to get back into the loop on world models. The last time I followed SSL closely, the buzz was all about Barlow Twins and DINO, but now everything just looks like scaled-up video generation from big industry labs. What is the actual academic research community stressing over right now?
+
+",80,discussion,,True
+1txlxm6,How do you identify researchers who are good? [D],"About 10 years ago, I got into the basics of ML (like regression, KNN's, LVQ's) and read a few papers before taking a break a few years back.
+
+It feels like now, there's a lot of researchers in AI. How do you identify the ones who are actually solid vs those who (forgive my phrasing) are more researchers for appearance/status (i.e don't actually know what they're talking about)?
+
+Is the core filter h-index or where they work? How would you identify them?",76,discussion,,True
+1ua2hwj,How does torch.compile() achieve massive speedups despite highly optimized NumPy functions? [D],"I was pondering on this question and decided to dive deep into torch.compile. It was a lot of fun learning about operator fusion as the central idea behind torch.compile. So I created a tiny version of torch.compile in 500 lines of python and a notebook showing how this works: 
+
+[https://github.com/purohit10saurabh/tinytorchcompile](https://github.com/purohit10saurabh/tinytorchcompile)
+
+Let me know if you find this interesting! 🙂",73,announcement,,True
+1tukrf4,Browse CVPR 2026 papers on PapersWithCode [P],"https://preview.redd.it/se5nr2z7tt4h1.png?width=3046&amp;format=png&amp;auto=webp&amp;s=7db15b73afb749da236e5bb50ff96372f6a3239b
+
+Hi,
+
+Niels here from the open-source team at Hugging Face. It's been 2 weeks since I [launched](https://www.reddit.com/r/MachineLearning/comments/1tgmwqr/reviving_paperswithcode_by_hugging_face_p/) [paperswithcode.co](http://paperswithcode.co/), a revival of the website we all loved. It allows us to keep track of the state-of-the-art (SOTA) across various domains of AI, from agents to computer vision and time-series forecasting.  
+
+
+I've just added conference support as a new feature. The idea is that you should be able to easily browse all papers of major AI conferences like NeurIPS, CVPR, and ICML.
+
+  
+As CVPR 2026 takes place next week in Denver, USA, I've indexed all papers with corresponding arXiv IDs. They are categorized by task, and tagged with linked GitHub and project page URLs, Hugging Face artifacts, and evals. 
+
+You can also browse the papers wh",72,announcement,,True
+1tmprdm,"How do ML practitioners select hyperparameters, architectures, etc for self-supervised representation learning when the loss is non-monotonic? [D]","Non-contrastive SSL methods like BYOL/JEPA/data2vec seem promising, but I have no idea what is being learned, or how well; it’s models all the way down. Maybe I’ve got supervised tasks for which I’d like to see transfer, and I can evaluate linear probe/KNN results during training, but that seems like a way to efficiently abuse researcher degrees of freedom.
+
+I know [RankMe](https://arxiv.org/abs/2210.02885) is meant to help address this: embed some data and SVD the embedding matrix. A healthy learner should produce an embedding with a high effective rank.
+
+But JEPA methods already require an entropy-collapse term like Barlow Twins/SIGREG, so the RankMe criterion just becomes part of training. It gets absorbed into a loss which wasn’t monotonic to begin with, and I ought to be able to inflate it by increasing the penalty weight. Surely it’s no longer an effective criterion, right? What else is there?",74,discussion,,True
+1u6p7k3,Open weights are not enough: we need open training frameworks for research and better algorithms [P],"Open weights are important and critical, but they are not enough by themselves.
+
+If we want open ML and AI research to move forward, we also need open training frameworks: codebases that do more than run jobs. They should make the training process visible, understandable, and modifiable, so researchers/engineers/practitioner can build new algorithms instead of fighting hidden systems.
+
+That was the motivation behind FeynRL (pronounced “FineRL”) a framework I built for RL post-training of LLMs, VLMs, and agents. RL is already hard to make work. With LLMs, VLM, and agents, it becomes even messier: rollout engines, reward computation, distributed training, weight syncing, credit assignment problems, long-horizon behavior, and many small implementation details that can quietly break everything.
+
+The core idea behind FeynRL is simple: ***algorithms should stay algorithms, systems should stay systems****, and researchers/engineers/practitioner should be able to understand the full training l",60,analysis,,True
+1u03yot,Should ArXiv backtrack endorsement? [D],"ArXiv has an endorsement system for a reason. I would only offer endorsement to whom I have direct academic collaboration or mentorship with, since I'm putting my own academic reputation on the stake. This is also the standard of almost any serious academic researcher I am aware of.
+
+Now ArXiv is making effort to crack down AI slop and banning accounts uploading low-quality research papers, which is a great initiative. By definition of an ""endorsement"", I wish ArXiv could backtrack and at least issue warnings to their endorsers, and if this happens multiple times (let's say three), people giving out careless endorsement should also face consequences.",58,discussion,,True
+1u8jyat,Is foundational AI research still something that can be done without access to HPC? [D],"I'm not that well versed in ML yet. I know that ""Attention is all you need"" was based on work that was done with a couple of high end gaming GPUs at the time. I can afford that.
+
+Suppose for arguments sake that I have caught up on ML such that I have the competence to recreate state of the art results should I have access to the required hardware, do I still need access to huge amounts of hardware infrastructure to be able to contribute to the field at a foundational level?",62,discussion,,True
+1tnhnh5,The famous METR AI time horizons graph contains numerous severe errors [D],"Nathan Witkin, a research writer at NYU Stern’s Tech and Society Lab, [writes](https://www.transformernews.ai/p/against-the-metr-graph-coding-capabilities-software-jobs-task-ai) damningly about the famous METR AI time horizons graph in the Substack publication Transformer:
+
+&gt;It is impossible to draw meaningful conclusions from METR’s Long Tasks benchmark — in particular once one realizes that its numerous flaws are probably compounding in unpredictable ways. The appropriate response to a study of this kind is not to assume it can be saved via back-of-the-envelope adjustments, or to comfort oneself that other anecdotal evidence implies that it is probably correct anyway. It is to cut one’s losses and move on in search of higher-quality information.
+
+&gt;… The METR graph cannot be saved. For all its sleekness and complexity, it contains far too many compounding errors to excuse. Among them is generalizing to the entire species data collected from a small group of the authors’ peers. C",63,analysis,,True
+1trn6ye,Graduating Without a PhD Internship [D],"In early 2022, I was deciding between PhD offers. The deal maker was a prospective supervisor telling me that through their connections with big tech, I would be able to do a PhD internship each summer, which was one of my main goals for the PhD.
+
+During my first and second years, they would tell me that companies prefer late-stage PhD students, so I should wait for the next summer. It eventually turned out they did not actually have the connections.
+
+Four years later, I am due to graduate without ever having done a PhD internship. I managed to land some interviews by cold-applying everywhere, but most roles were for roles outside my niche research area, which understandably led to rejections.
+
+I went back through my emails and found every interview I did. Here is the summary:
+
+09/22: Start PhD 09/23: PhD Research Intern @ Big Tech#1. Rejected after two interviews. I do not think I had a strong enough background in the field.
+
+01/24: PhD Research Intern @ Startup#1. Rejected after one ",55,analysis,,True
+1u64rse,Quant firms at ICML 2026 [D],"I noted that in ICML 2026, quant firms are flocking and sponsoring as Diamond sponsors. Any reason? 
+
+Source: [https://icml.cc/sponsors/sponsors-list?year=2026at](https://icml.cc/sponsors/sponsors-list?year=2026at) ",49,discussion,,True
+1u66q3l,How does the ML community view evolutionary algorithm research? Career implications of an EA PhD? [D],"How does the ML research community feel about evolutionary algorithms? Should I do a PhD in this area?
+
+Quick remark: I know some people in the ML community dunk on evolutionary algorithms because there’s often a better optimizer, but they do have their place, which is what researchers in my community aim to quantify.
+
+Background:
+
+I just finished my first year as a mathematics master’s student working on the theory of evolutionary algorithms (EAs)/randomized search heuristics. I’m fortunate to be on a research assistantship and have already coauthored several papers in strong conferences in our area.
+
+I’ve always been more interested in classical ML/deep learning theory but haven’t had anyone to work with. Researchers in my field, including my advisor, occasionally publish in mainstream ML venues such as AAAI and NeurIPS, but it’s primarily the EA venues.
+
+For a while now, I’ve been independently studying deep learning and statistical learning theory, and I have found intersections wi",49,discussion,,True
+1u9j7md,"Fearless Concurrency on the GPU: Safe GPU inference in Rust, competitive with vLLM/SGLang [R]","I maintain cuTile Rust and just posted the paper ""Fearless Concurrency on the GPU.""  
+  
+As more GPU code gets AI-generated, the bottleneck moves from writing it to trusting it. cuTile Rust lets you write or generate GPU kernels whose memory safety and data-race freedom are verified by the compiler, through Rust's ownership and borrow checking. You get those guarantees by construction. It's a tile-based programming model that lowers to CUDA Tile IR, carrying Rust's ownership model across the launch boundary. You partition a mutable output into disjoint mutable sub-tensors, pass inputs as shared references, and write tile kernels with single-threaded semantics that the compiler maps to thread blocks.  
+  
+End to end, we built Grout, a Qwen3 inference engine, on cuTile Rust with Hugging Face. At batch-1 decode it reaches 171 tok/s for Qwen3-4B on an RTX 5090 and 82 tok/s for Qwen3-32B on a B200, competitive with vLLM and SGLang. Batch-1 decode is memory-bandwidth-bound, and Grout's throu",46,announcement,,True
+1u1ht5x,iOS 27 Siri is using WaveRNN and FastSpeech2 [D],"Found from iOS Simulator's files. Both of them are in espresso format
+
+There's also another compiled CoreML for concert ranking and based on the content inside of it looks like to be a simple logistic regression. See [https://www.reddit.com/r/jailbreak/comments/1u1e1b4/access\_to\_simulators\_root\_files/?utm\_source=share&amp;utm\_medium=web3x&amp;utm\_name=web3xcss&amp;utm\_term=1&amp;utm\_content=share\_button](https://www.reddit.com/r/jailbreak/comments/1u1e1b4/access_to_simulators_root_files/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button)
+
+Edit:
+
+Its the Siri's TTS",46,announcement,,True
+1tnwdss,Already 11 000 submissions for EMNLP? [D],Is this normal? I searched it up and last year it was only 8000.,46,analysis,,True
+1ucm508,Some new updates to Papers with Code [P],"Hi folks,  
+
+
+Niels here from the open-source team at Hugging Face. I continue working on a revival of [paperswithcode.co](http://paperswithcode.co) as we're back to the ""age of research"" per Ilya Sutskever! Hence, it's important to discover each other's research and build on each other's work, so we can collectively build the next Transformer. Below, I'll go over each of the new features that were recently added.
+
+\## Support for SOTA badges
+
+Yes, that's right, totally like the old website. You can see that GLM-5.2, for instance, is obviously the hottest blog post today, achieves SOTA on PostTrainBench, and performs well on many other benchmarks. It is displayed whenever a paper gets a score within the top 3 of a given benchmark.
+
+Note that these are displayed on any paper feed, including [https://paperswithcode.co/tasks/video-classification](https://paperswithcode.co/tasks/video-classification), for example.
+
+https://preview.redd.it/wawma8paeu8h1.png?width=2418&amp;format=png&amp;aut",45,announcement,,True
+1u67koz,Why do frontier AI labs send so many people to conferences? [D],"Recent years I see plenty of folks from OpenAI and Anthropic attending conferences like ICML/Neurips, yet obviously few are presenting. Are they mainly recruiting? Following emerging research?
+
+Curious if anyone with firsthand experience can shed some light on how attendance is justified internally and what the main objectives usually are.",37,discussion,,True
+1tr80ll,How Much of a Shortcut Are Connections in Top AI Lab Hiring for PhD grads? [D],"hi everyone.
+
+I'm trying to calibrate my expectations and would appreciate full honest perspectives from people involved/ with experience in hiring at places like Anthropic, OpenAI, Google DeepMind, Meta, etc (haven't started interviewing yet).
+
+I'm at a top ML university, but my advisor is not particularly well known in industry and doesn't have many industry connections. Looking around, I'm seeing peers with research records that seem comparable to mine (and in some cases arguably weaker) land interviews and jobs at top labs.
+
+My main question is:
+
+How much does advisor reputation and network actually matter?
+
+I understand it can help get an interview, but does it also help beyond that? For example:
+
+\- do referrals from famous advisors meaningfully influence recruiter screens?
+
+\- do they influence hiring committee discussions -- *like they already know they want you*?
+
+\- do they just help at borderline decisions?
+
+\- or does their effect mostly disappear once the interview process",39,discussion,,True
+1tqrtkn,Making LLMs tell you how confident they really are through probe-targeted fine tuning.[R],"Just wanted to share my research regarding probe-targeted fine-tuning (LoRa) for verbal confidence calibration., 
+
+If you probe the hidden states of an instruct-tuned LLM, it can tell correct from incorrect answers at 0.76–0.88 AUROC. But when you ask it directly it tends to respond with confidence at 99% for everything. The model knows if it actually knows but it won't admit it.
+
+I took the probe's output and used it as fine-tuning targets. This teaches the model to say out loud what it already knows internally. LoRA, few hundred examples, under 10 minutes on an M3 Ultra.
+
+I tested on 8 models across 4 families (7B–70B).
+
+* Activation patching shows it's actually causal. Not just a correlation. If you swap hidden states at the confidence position you can watch confidence shift (ρ = 0.976 layer gradient). If swap occurs at a random position then nothing happens.
+* At 70B, the softmax distribution carries valid metacognitive signal but the argmax text is still stuck at 99% confident. Th",34,analysis,,True
+1tyy0vj,ML reading group to read recent interesting and trending papers from ICML/ICLR/NeurIPS [D],"Hi, I am a PhD student and trying to run a ML reading group focused on interpretability and robustness every weekend. Its always nice to hear different takes and opinions on a paper and this discussion group could serve the purpose. If you are a fellow PhD student or a ML researcher interested in reading recent papers in depth then please fill this google form to be added in the group for receiving further updates on when we can meet and discuss: [https://docs.google.com/forms/d/e/1FAIpQLSdNg4x60lUHV7YW\_kKPFlpPR3Rom\_rOovbryD8YtOGQR8x0Kw/viewform](https://docs.google.com/forms/d/e/1FAIpQLSdNg4x60lUHV7YW_kKPFlpPR3Rom_rOovbryD8YtOGQR8x0Kw/viewform)",31,discussion,,True
+1txvvo4,"TinyTPU: SystemVerilog systolic array compiled to WASM, running live in browser - RTL golden-verified against numpy [P]","Most explanations of TPUs and systolic arrays are either hand-wavy diagrams or papers. I wanted to see the thing actually run, so I built it.
+
+TinyTPU is a 4×4 weight-stationary systolic array in real SystemVerilog, compiled to WebAssembly, with a step-by-step browser visualization. 
+
+You enter two matrices, hit run, and watch the actual hardware execute: weights loading into PEs, matrix A streaming in diagonally (the ""skew"" that makes systolic arrays work), partial sums accumulating down the grid, results draining from the bottom.
+
+It has three levels:
+
+* **L1** \- isolate a single MAC cell, watch one multiply-accumulate happen
+* **L2** \- the full 4×4 array executing a real matmul
+* **L3** \- tiling: what happens when your matrix is bigger than the hardware
+
+Nothing on screen is faked. The visualization reads state directly from compiled RTL.
+
+If you're trying to understand how matrix multiply maps to hardware why TPUs are efficient, what ""weight-stationary"" actually means, why the d",33,announcement,,True
+1u8bp65,ACL 2026 first author with weak GPA. How should I approach PhD applications? [D],"Hi everyone,
+
+I have a fairly weak undergraduate: a 3.3/5 GPA in Computer Engineering from an average Nigerian university. For my Master's, I studied Artificial Intelligence at an average European university, where I finished with an 8/10 GPA.
+
+A condensed version of my Master's thesis was recently accepted at ACL 2026, with a meta-review score of 8/10 and a confidence score of 5/5. It's scheduled for presentation next month.
+
+I want to pursue a PhD focused on expanding linguistic resources for low-resource African languages. I know my weak undergrad GPA and the relatively unknown reputation of my previous universities will make it hard to get into top NLP programs (CMU, Edinburgh, ETH, MBZUAI, etc.), though I'm hoping the ACL paper helps offset that somewhat.
+
+At the same time, I don't want to end up at a less competitive university just for the sake of getting in somewhere, if it doesn't do meaningful work on low-resource NLP.
+
+How should I think about structuring my application stra",34,discussion,,True
+1trvuxb,Why do the output layer weights become word vectors in Word2Vec? [D],"I'm trying to understand the intuition behind Word2Vec training using a neural network.
+
+In Word2Vec (CBOW or Skip-gram), we often hear that the weight matrices learned during training contain the vector representations (embeddings) of words. However, I don't understand why the weights of the hidden-to-output layer (or output weight matrix) end up representing semantic features of words.
+
+Why do these weights become meaningful vector representations instead of just being parameters used to make predictions?
+
+I've explored multiple YouTube videos, blog posts and even asked ChatGPT several times, but I still haven't found an explanation that truly clicks for me. Most resources explain that the weights become embeddings, but not why this happens intuitively and mathematically.
+
+Could someone provide a clear intuition or mathematical explanation of why the output-layer weights end up encoding semantic information about words?
+
+Any good resources that explain this particularly well would al",29,discussion,,True
+1ubtf09,A slightly improved DVD-JEPA demo [P],"Hey!
+
+I came across [this post](https://www.reddit.com/r/MachineLearning/s/nULg3kCMEu), which I found quite neat as a minimal demonstration of JEPA. However, as the comments pointed out, there was some room for improvement. So I added a few things such as environment noise and a fair\* comparison to a pixel-space baseline. 
+
+I think the inclusion of environment noise is pretty key, as LeCun himself has stated often and clearly that one of the key motivating factors for JEPA is its ability to disregard unpredictable and irrelevant environment details.
+
+Anyway, here’s the result which I think speaks for itself:
+
+https://i.redd.it/kadcsrx4nn8h1.gif
+
+I think my version paints a much clearer picture of JEPA’s promise. I did remove the web-demo and anomaly detection bit as I felt that wasn't so important to the core demonstration of JEPA as an idea
+
+  
+Linking [my fork ](https://github.com/BeepBo0p/dvd-jepa)for those interested. Note: Since this was a very quick afternoon-project , I did use",28,announcement,,True
+1ubz5o8,"An Update on Matrix Recurrent Units, an Attention Alternative [R]","I recently revisited my matrix recurrent units algorithm (the MRU), a novel linear-time sequence architecture I created as an alternative to attention. I explain it in depth at the [repo](https://github.com/mikayahlevi/mru-lm), but the gist is the MRU works by transforming the embedding into an input state matrix, cumulatively multiplying the matrices across the sequence dimension to get the output state matrix, and then transforming the matrices back into a vector. In order to make the MRU efficient on DL hardware, I created a parallel scan by utilizing the operation's associativity.
+
+[About a year ago, I shared my project on Reddit](https://www.reddit.com/r/MachineLearning/comments/1he8vhw/project_matrix_recurrent_states_a_attention/) (I've since renamed my account), with good results on the toy dataset shakespeare-char. A commenter asked the steps taken to bound the matrix states and another commenter found that training was inherently unstable when training on more comprehensive da",30,announcement,,True
+1twnj5r,KVarN: Variance-Normalized KV-Cache Quantization [R],"Excited to share some of my own work here :) 
+
+**KVarN** is our new KV-Cache quantization method. In very brief, we combine Hadamard rotations with variance-normalization *on both axes* of the K and V matrices, then round to nearest. Simple, but works very well, especially for decode-heavy test-time-scaling settings (reasoning, code-gen, agentics). We get 3-4x compression at virtually no accuracy drop (mostly 0-1%) on tough benchmarks like AIME24 as well as a speed-up over fp16 baseline in vLLM (in contrast to other recent KV-Cache compression works).
+
+Behind it is an analysis of where quantization errors come from and have the biggest impact, especially in the error-accumulating decode setting: 1) fixing large errors is disproportionally useful (if you had a fixed MSE budget that you could \~fix, you should spend it on few big errors, rather than many small) 2) These big errors are mostly caused by bad token-scales (hence the normalization).
+
+Paper: [https://arxiv.org/abs/2606.03458](",28,analysis,,True
+1to76tv,[P] Built a portable GPU ISA after reading too many architecture manuals [P],"I’ve been reading GPU architecture docs in my free time. NVIDIA PTX, AMD ISA reference guides, Intel Xe, reverse-engineered Apple GPU stuff. Over 5,000 pages across 16 microarchitectures.
+
+After a while you notice all four vendors are doing the same 11 things with different names. So I wrote a spec that covers all of them and built a toolchain around it. It’s called WAVE. You write a kernel once, it compiles to a portable binary, then thin backends translate it to Metal, PTX, HIP, or SYCL.
+
+Same binary verified on Apple M4 Pro, NVIDIA T4, and AMD MI300X. My co-author Onyinye built PyTorch integration and got identical training results across all backends.
+
+Please star on GitHub: [https://github.com/Oabraham1/wave](https://github.com/Oabraham1/wave)  
+Preprint: [https://arxiv.org/abs/2603.28793](https://arxiv.org/abs/2603.28793)  
+Read full docs and how I built everything: [https://wave.ojima.me](https://wave.ojima.me)
+
+pip install wave-gpu",27,announcement,,True
+1u83kzt,What is Speculative Decoding? (trending on paperswithco.de) [R],"A method that is currently trending on [Papers with Code](https://paperswithcode.co/) is Speculative Decoding.
+
+https://preview.redd.it/dm4nh4t71o7h1.png?width=3082&amp;format=png&amp;auto=webp&amp;s=b6468668667d4bcfb6c9248d3af7fd09f21fe0da
+
+Speculative decoding is an inference optimization technique that uses a fast, small ""draft"" model to quickly propose several future tokens, which are then verified in parallel by a larger, slower ""target"" model.
+
+This process significantly speeds up token generation for large language models (LLMs) by allowing multiple tokens per step without sacrificing output quality.
+
+SGLang, one of the most popular frameworks for running LLMs alongside vLLM, just released a blog post detailing how they achieve state-of-the-art latencies for LLM inference serving using Modal and Z.ai's DFlash speculative decoding models.
+
+Learn more at [https://paperswithcode.co/methods/speculative-decoding](https://paperswithcode.co/methods/speculative-decoding). You can also f",24,announcement,,True
+1u3nims,MICCAI 2026 Results [D],Results are almost here. Good luck to everyone waiting for the final decision 🙂,26,discussion,,True
+1tt9xbt,UAI Results are out [R],"You can’t see AC comments yet, but you can see the Accept/Reject consoles. My paper (with scores of 8,6,3) got rejected. ",25,discussion,,True
+1tovj42,[R]GNN Model For Fraud Detection Isn't Performing Well[R],"We're writing a research paper on explainable fraud detection GNN model and in the first step we're creating a basic Graph Neural Network for that. We're using the  most famous dataset available on this topic i.e IEEE CIS Fraud Detection Dataset and implemented all necessary feature engineering on that data (although majority of feature engineering is already performed in the dataset). Then we constructed a heterogeneous graph on that dataset. Various transaction features like device, transaction id, amount are embedded as nodes and connected with transaction nodes. But the issue is after training the model isn't performing well. It is producing average AUC of 0.87, PR-AUC of 0.52, recall@5% around 0.57 and precision@5% around 0.37 (We tried GCN, GraphSAGE and GAT, all performs almost same for rest data)
+
+Whereas the SOTA models in this topic produce much better metrics. Can anyone tell where potentially we're doing things wrong?",25,discussion,,True
+1tn8uoq,Are ICML workshops worth attending? [D],"Hi!
+
+I missed securing a main conference ticket for ICML 2026, as my workshop paper got accepted two days ago. Do you believe that it is worth attending just workshops at such A\*-tier conferences (with all the overseas travel costs etc.)? 
+
+I was quite looking forward to attending both, including the talks, poster sessions and company booths. I come from an adjacent field and have therefore had quite a few conference experiences. Any insights into past experience are highly welcome.
+
+Thank you!",24,discussion,,True
+1u8xghq,What does provisional paper acceptance mean in ECCV? Is that the default message everyone gets? [D],What does provisional paper acceptance mean in ECCV? Is that the default message everyone gets?,21,discussion,,True
+1tvw6sc,Analysis of AlphaZero training data [D],"I am trying to train an AlphaZero model for Othello on a 6x6-board. 
+
+Having been warned that too little exploration during data generation can lead to models being overconfident and trapped in some tight region of the search tree, I started with the value c\_puct = 4.0, and then reduced this to 3.5 after a few generations. Also, I added fairly peaked Dirichlet noise (alpha = 0.15) to the prior predictions at the root of each tree search, with the proportion epsilon = 0.25.  The temperature was initially set to 1.0, and then reduced to 0.8 after 20 generations. 
+
+Now, the models do improve in the sense that later models consistently beat earlier ones, but there is no significant improvement against the two benchmarks I use: classical MCTS, and a greedy agent. Against the latter, the models have a deplorably low win rate of less than 10%. 
+
+As can be seen from the curve for the value loss on the validation data, the models don't seem to learn to predict values (which is why I have been ",22,analysis,,True
+1tnhfxp,"DCGAN inference on a microcontroller: 12.6M parameters, 512KB SRAM, 26-second generation, pure C [P]","Just thought I'd share, I ran a DCGAN on a dual core RISC-V microcontroller, the CH32H417 generating 64x64 cat faces. This is a new RISC-V MCU, so no TFLite, no CMSIS NN and no external memory. It's a pure C inference engine, bit-identical to PyTorch reference outputs.
+
+The model is 12.6M parameters with int8 per channel quantization. Intermediate activations are stored in DTCM and layer weights stream from SD card using double buffering so the next layer loads while the current one computes. The total available SRAM is 512KB shared between both cores and the inference engine and time to generate one image is 26 seconds, it could be faster, but SD card access speed is the bottleneck rather than computation.
+
+The z vector is seeded from 200 bytes of quantum random data (ANU QRNG vacuum fluctuation source), transformed via Box-Muller into the latent vector. which is not strictly necessary for image quality but it was a fun constraint for the art installation side of the project.
+
+The gen",21,announcement,,True
+1u4hy2x,PaddleOCR (v3/v4/v5/v6) implemented in C++ with ncnn [P],"Hi,
+
+About a year ago I shared my PaddleOCR implementation here. Since then I've made many improvements, and it now supports PP-OCR v3 through the **latest v6** models.
+
+The official Paddle C++ runtime has a lot of dependencies and is very complex to deploy. To keep things simple I use ncnn for inference, it's much lighter (and faster in my task), makes deployment easy.
+
+Hope it's helpful to some of you, and feedback welcome!
+
+https://github.com/Avafly/PaddleOCR-ncnn-CPP",21,announcement,,True
+1tw0j33,"First paper acceptance (ICML Workshop), should I attend? [D]","I just finished my first year of undergrad, and I got my first first-author paper accepted to an ICML workshop! Super stoked, especially since I was lowk a crashout in high school 
+
+I wanted to know if it is worth it for me to go? It's quite expensive, and I will be the only one in my lab in attendance, so I will be on my own. If I do attend, how would I best maximize this opportunity? I got an email saying main conference tickets would also be made available for accepted authors, so I would likely be able to attend that as well. What are the best ways to network, meet people, and make sure it's worth it? Also, I am applying for transfer for this next cycle, so any advice relevant to that is also appreciated.",20,discussion,,True
+1uc0m1e,[ECCV 2026] Paper Decision Appeals Discussion [D],"With the release of meta-reviews, ECCV sent out a google form for dissatisfied authors to submit an appeal for the following reasons:
+
+1. Policy errors, e.g., reviewers or Area Chairs applied a policy that does not exist, or reviewers or Area Chairs applied policies that are not applicable for the contribution type of the paper; 
+2. Clerical errors, e.g., it is clear from the meta-review that an Area Chair intended to accept a paper but the paper was rejected; and
+3. Obvious and major misunderstandings on the side of the reviewers or Area Chairs (historically, these are extremely rare).
+
+Is anyone considering submitting an appeal? I was rejected with 6/4/3 final scores on criteria that policy and [AC](https://eccv.ecva.net/Conferences/2026/ACGuidance)/[Reviewer](https://eccv.ecva.net/Conferences/2026/ReviewerContributionTypes) guidelines explicitly state my [contribution type](https://eccv.ecva.net/Conferences/2026/AuthorContributionTypes) should not be penalized for. Also, according t",20,discussion,,True
+1u73c5r,quicktok: a faster tokenizer (exact and byte-identical with tiktoken) [P],"Been working on this a while! Should be useful for anyone trying to speed up their tokenization workflows.
+
+**quicktok** is a fast/exact BPE tokenizer written in C++. Token ids are byte-identical to `tiktoken` and encoding runs **2–3.6×** faster than `bpe-openai` (the fastest alternative I know of) and **4–11×** faster than `tiktoken` itself. It ships cl100k, o200k, GPT-OSS, Llama-3, and Qwen2.5/3.
+
+**Approach.** Same algorithm as `bpe-openai` (exact backtracking BPE) but I apply lots of data structure engineering to cut memory accesses:
+
+* A 2-byte trie is used for the longest-match walk
+* Dense exactly-keyed caches are used for merge-validity checks
+* A hand-compiled pretokenizer is used instead of a general regex engine
+
+**Benchmarks** (Apple M1, single thread, MB/s, cl100k\_base and every output verified token-for-token before timing):
+
+|encoder|The Pile|Code|Common Crawl|
+|:-|:-|:-|:-|
+|**quicktok (native)**|**121.7**|**139.2**|**71.3**|
+|**quicktok (Python)**|**77.9**|**83.6**|**",19,announcement,,True
+1u390q5,Post-docs in ML [D],"Are there any websites listing post-doc job opening in machine learning? Currently I'm using LInkedIn to search for these. 
+
+When I was a math post-doc, everyone used ""MathJobs.org"" to find jobs. Is there a similar website for machine learning? Thanks. ",19,discussion,,True
+1u2c04u,"Routing LLMs by task verifiability: a small experiment (n=120, 3 models) inspired by Karpathy's framework [D]","Full disclosure: this is directional, not a paper. n=120 tasks, one internal evaluator, not peer reviewed. I work at an LLM infrastructure company. This experiment was done on my own time and is not a company claim.
+
+Karpathy's framework classifies tasks by verifiability. Can output be mechanically checked? High verifiability tasks like code compilation and structured JSON extraction are safer because the verifier catches errors. Low verifiability tasks like creative writing are riskier.
+
+I wondered if high verifiability tasks are also easier in practice. Can a weaker model do them as well as a frontier model if the verifier catches mistakes?
+
+Setup was 120 tasks across four categories. Code unit tests, structured extraction, multi hop reasoning, creative summarization. Three models: Claude Sonnet 4.6, GPT 5.5, local Mistral 3 8B via vLLM 0.6.3. Pass rate for the first two, human rating 1 to 5 for the last two. We used TokenRouter to manage the routing and fallback logic.
+
+Results were",20,analysis,,True
+1u07tlm,Why I stopped using semantic embeddings for tool selection and switched back to BM25 [D],"I've been building agents for about a year and recently shipped one for a client running \~140 MCP-exposed tools at peak. Along the way I made the canonical mistake. I used cosine similarity over tool description embeddings to pick which tools the model could see per turn. Worked great in demos. Was actively dangerous in production.
+
+Here's the problem. In a basic semantic-ranking setup you embed the user query, embed every tool description once, and rank by cosine similarity at runtime. That works for general document retrieval where chunks are paragraph-length, semantically rich, and roughly equal in form.
+
+Tool descriptions are not that. They are short (often &lt;50 tokens), structurally similar (verb-noun, parameters list), and the discriminative information is often a single keyword. ""Read a file from disk"" and ""Read messages from a channel"" both embed close to ""read"" + ""file/channel."" Cosine similarity puts them next to each other for a query like ""read the latest commits"" becaus",20,analysis,,True
+1tylgoq,Anyone here with experience submitting to Nature Machine Intelligence? [R],"I'm planning to submit a paper to either NMI, but this will be my first paper to a nature-like venue. Would love a quick chat with anyone that has experience.
+
+My paper's specifically more geared towards signal processing with ML for a specific subfield of engineering. But can be interdisciplinary.",19,discussion,,True
+1u2soc6,ACL ARR May 2026 Reviewer paper distributions [D],ACL ARR May 2026 reviews are due on July 2. I do not see any reviewer assignement as of today. Will the review period be just 2 weeks in that case? Anyone got papers assigned for reviewing? ,17,discussion,,True
+1tnn89v,Aiki my local Wikipedia Retrieval-Augmented Generation system [R],"# Hey
+
+i built Aiki a lightweight tool that let's you chat with Wikipedia locally.
+
+https://i.redd.it/67mzfsrc6f3h1.gif
+
+**what it does:**
+
+* Downloads and chunks wikipedia articles (u can choose those articles by their name or articles and also the option of downloading the similar topics)
+* Uses a custom TF-IDF + cosine similarity retriever (built from scratch)
+* Supports query expansion using Wikipedia links/redirects
+* Optional answer generation with llm
+
+Very minimal dependencies and runs completely locally.
+
+**Repo:** [**https://github.com/yacine204/Aiki**](https://github.com/yacine204/Aiki)
+
+Would really appreciate your feedback.",16,announcement,,True
+1u4zbld,I’m building a free bilingual machine-learning notebook course — looking for feedback on structure and coverage [R],"Hi everyone,
+
+I’m building an open-source machine-learning tutorial repository in Jupyter Notebook format:
+
+[https://github.com/mohammadijoo/Machine\_Learning\_Tutorials](https://github.com/mohammadijoo/Machine_Learning_Tutorials)
+
+The course is bilingual: English and Persian/Farsi versions are organized in parallel. The goal is to make a practical, notebook-first ML curriculum that students can run locally and study step by step.
+
+Current focus areas include:
+
+* ML foundations and workflow
+* data cleaning, preprocessing, feature engineering
+* regression and classification
+* tree models and ensembles
+* clustering and dimensionality reduction
+* evaluation, cross-validation, calibration
+* time series, anomaly detection, responsible ML, and MLOps concepts
+* datasets and exercises for hands-on practice
+
+I would appreciate feedback on:
+
+* whether the chapter order makes sense for beginners
+* what important classical ML topics are missing
+* whether bilingual notebooks are useful for non-nati",15,announcement,,True
+1tyq81n,Sources for ML news? [D],"I need a break from social media and all the bots.. Aside from Arxiv are there any sources that do a good job of aggregating the good stuff and filtering out all the junk? 
+
+ ",16,discussion,,True
+1tudeio,[D] Self-Promotion Thread,"Please post your personal projects, startups, product placements, collaboration needs, blogs etc.
+
+Please mention the payment and pricing requirements for products and services.
+
+Please do not post link shorteners, link aggregator websites , or auto-subscribe links.
+
+\--
+
+Any abuse of trust will lead to bans.
+
+Encourage others who create new posts for questions to post here instead!
+
+Thread will stay alive until next one so keep posting after the date in the title.
+
+\--
+
+Meta: This is an experiment. If the community doesnt like this, we will cancel it. This is to encourage those in the community to promote their work by not spamming the main threads.",14,discussion,,True
+1tp2nnw,Profiling PyTorch training without accidentally stalling the GPU [D],"Profiling PyTorch training has an interesting measurement problem: the more you measure, the more you can change the behavior of the run itself.
+
+A simple example is `torch.cuda.synchronize()`. It gives cleaner timing boundaries, but it also inserts synchronization points into an otherwise asynchronous CUDA workload.
+
+An alternative is to use CUDA events around selected boundaries and read them later, so timing can be captured without forcing synchronization in the hot path. This does not replace PyTorch Profiler or Nsight, but it can work as a lightweight first pass before deeper operator-level profiling.
+
+I wrote a short technical note about this while working on an open-source PyTorch training diagnostics tool:
+
+[https://medium.com/p/19adf1054bcf](https://medium.com/p/19adf1054bcf)",15,analysis,,True
+1tn1rtk,"If you use NVIDIA Isaac Sim for reinforcement learning, do you use Isaac Lab with it? Just want to get a sense of what the status quo is. [D]","The reason for this query is that I am in the process of shifting to Isaac Sim / Isaac Lab since that is what seems to be in use nowadays. However, Isaac Lab is proving to be somewhat difficult to handle.
+
+While it handles the logging, and the creation of multi-actor systems for algorithms like PPO beautifully (with, say, hundreds of actors), its documentation leaves much to be desired. I am also concerned about the ease of setting up new robotic environments, actions, rewards, policies and possibly even custom algorithms.
+
+So, what is it that *you* do at your lab?
+
+In my mind there's a trade-off. On the one hand, I use the Isaac Lab scaffolding but run into its idiosyncracies very frequently until I document everything I need. Or, I interface directly with Isaac Sim, but then I need to write my own handlers for interfacing Isaac Sim with the RL agent.",15,discussion,,True
+1u9afup,Latent space interpretation [R],"Hi all, I have trained a convolutional autoencoder on a set of medical images. Further classified latent feature maps using random forest to find the top scoring feature map. Now my goal is to understand which input image is captured in top scoring latent feature map. Any suggestions? I have tried encoding one image at a time while other images were muted. I then checked spearman between top scoring feature map with the original top scoring feature map. While I see some expected results, I still have some false positives. I have also tried decoding only top scoring latent feature map by setting others feature maps to 0. But I believe, the decoder entanglement is giving me many false positive results. ",14,discussion,,True
+1u3quwk,Building an Open Source Edge Semantic Cache for LLMs in Rust/WASM – Sanity check on the architecture? [D],"Hey everyone,
+
+I am planning out a new open-source infrastructure project and want to get some brutal feedback on the architecture and use-case validity from people running high volume LLM workloads in production.
+
+**The Problem:** Python-based proxies/gateways introduce too much latency overhead for real-time streaming agent steps or fast UI completions. Additionally, centralized semantic caching still suffers from cross-region network latency (e.g., London to us-east-1), and enterprise API costs remain a massive bottleneck for repetitive/predictable user queries (like customer support or structured data extraction).
+
+**The Proposed Architecture:** Instead of a heavy centralized gateway, the goal is to build a lightweight, zero-dependency semantic cache running directly at the CDN Edge using WebAssembly (WASM) compiled from Rust.
+
+The flow looks like this:
+
+1. **Inbound Prompt:** Hits the edge node closest to the user (e.g., Cloudflare Workers / Fastly Compute).
+2. **Edge Embedding:**",12,discussion,,True
+1ub81us,"Python packages for particle swarms, genetic algorithms.  Scikit-opt maybe? [D]","I'm working with a client on a curve-fitting optimization problem. They are currently using a constrained Levenburg-Marquardt optimizer for their task which is complex, slow, and sometimes gets stuck in local minima.
+
+I suggested using particle swarm optimization (PSO), and the client suggested genetic algorithms (GA). I would like to compare the existing method to at least these two other options. For this first phase, I don't need to worry about speed or GPU-friendliness. I would like data visualization to be easy.
+
+I have experience with [scikit-learn](https://scikit-learn.org/), and I just discovered [scikit-opt](https://scikit-opt.github.io/). I have also found several other packages which implement only PSO, or only GA.
+
+Is anyone out there using scikit-opt? What do you think of it? If you have used other PSO or GA packages, what do you think of those?
+
+Thanks for any advice you may have.",10,discussion,,True
+1twkfec,How Do You Handle Ablation Studies When the Original Model Is Already Trained?[R],"I'm running into an issue with an ablation study for a paper I'm preparing. I trained a model. The model achieved my best result, and I saved the trained checkpoint (`.pth` file). Now my supervisor wants me to perform an ablation study by removing components and how it impacts the accuracy. My concern is that if I retrain from scratch, the accuracies will not exactly match the original run due to randomness, different seeds, etc. is there any way i can do the ablation study without retraining?  I'd appreciate hearing how others have handled this situation in publications or thesis work. please help me out",11,discussion,,True
+1tu0y14,Why our #1 LightGBM feature by importance made predictions worse [D],"We recently hit a classic gradient boosting trap with our pricing engine (Flyback), and I wanted to share the ablation data. We run LightGBM quantile regression to forecast secondary market watch prices.
+
+We engineered a variant-conditioned Bayesian target encoder to isolate within-reference pricing dynamics. LightGBM absolutely loved it. It ranked #1 in feature importance at q90 by a wide margin, with gains several times the next-highest feature, across all our multi seed runs.
+
+But when we ran a strict 4-seed × 3-variant ablation on the hold-out set, the results inverted. Test MAPE regressed by +0.28pp and the between-variant delta was 7x the within-variant standard deviation. The encoder was finding effective splits that completely failed to generalize because the signal it was learning was driven by irreducible label variance: unobserved factors like condition nuance, seller behavior, and timing that no feature can capture.
+
+I wrote a full post breaking down the architecture, the a",10,analysis,,True
+1tpnuhi,STEM PhD's transitioning to MLE/Data [R],"I'm hoping for some advice from any former PhD's outside of machine learning. If you made it into machine learning engineering and/or data science, what was the key for you? Any tips for this job market? It seems like non computer science PhD's are especially in trouble at the moment. ",10,discussion,,True
+1tz7014,Research collection of Arxiv whitepapers [R],"I've launched a [hand-curated collection](http://inquiringlines.com) of 1700 Arxiv LLM-focused white paper excerpts knitted together with connecting ""inquiring lines"" of research - not just topical connections, but shared research angles. For 1700 papers there are 6,000 [topic notes ](https://inquiringlines.com/topics/)that categorize research (alignment, mechinterp, RL, etc). And then 7,000 [inquiring lines](https://inquiringlines.com/inquiring-lines/) built from shared research questions (e.g. What explains LLM reasoning?). 
+
+Because the collection is limited, each inquiring line provides a prompt you can drop into an LLM to find related research that's not in the collection. You can also explore inquiring lines by faceted search (e.g. Reasoning failures &amp; Reasoning traces). 
+
+I built this in part because papers themselves are so tightly focused on their own research inquiry and related works and methods, it's difficult to find similar projects but in different domains (e.g. pers",10,announcement,,True
+1ttxcm5,Finetuning a Reasoning LLM with Supervised or Reinforcement Learning? [D],"Hello,
+
+I have a task to fine-tune small LLMs on annotated conversational data. The dataset contains not only the final answers, but also reasoning traces and tool-calling decisions (i.e., when the model should think and when it should call a tool).
+
+I am wondering what the best training approach would be and why.
+
+My current dataset is stored in a chat format similar to this:
+
+```text
+system
+user
+assistant_think
+assistant_tool
+assistant_answer
+
+user
+assistant_think
+assistant_tool
+assistant_answer
+...
+```
+
+My current idea is to split each conversation into multiple training samples. For example, if a conversation contains two user turns, I would create two samples:
+
+## Sample 1
+
+```text
+system
+user
+assistant_think
+assistant_tool
+assistant_answer
+```
+
+## Sample 2
+
+```text
+system
+user
+assistant_think
+assistant_tool
+assistant_answer
+
+user
+assistant_think
+assistant_tool
+assistant_answer
+```
+
+In other words, each sample contains all previous conversation history up to the assistant response",9,discussion,,True
+1tsuk34,When are ICML openreviews made public? [R],"First time, so no idea.",10,discussion,,True
+1tpvw6q,ACM MM 2026 review discussion [D],The AC email says the rebuttal is between 28 to 4th. The June 4th on website is the deadline. So I created this post for the discussion. I know it's a MM conference and less about ML but I think many people here are still submitting there. ,8,discussion,,True
+1u1cklt,What will be the next breakthrough in ASR? [D],"Hey All,
+
+I am currently working on ASR models, and I have gathered some recent literature. From my literature search, it seems like the ASR models are getting more and more powerful due to two main things.
+
+1. Because pseudo-labelled data is growing, supervised models are rising rapidly. Whisper-large-v3 has been trained on 5M hours of weakly supervised data, and Nvidia Parakeet v3 has been trained on 660k hours of labelled data (open-sourced). Funny enough, Nvidia Parakeet v3 actually beats Whisper-large-v3 on almost every benchmark, even though it has a smaller model size and smaller data scale. So clearly, scale is not everything.  
+  
+2. New architectures are on the rise; We used to have self-supervised + CTC to solve the ASR task, but now it seems like Transducer, and Token-Duration-Transducers are taking off. As well as attention encoder-decoder architectures (Qwen) that are all trained in a supervised manner.
+
+  
+Now, given that the labelled data is very huge, and the new archi",10,discussion,,True
+1tr127y,ICML paper checker is down? [D],"I was getting ready to upload my camera-ready paper to ICML (few minutes before the deadline... no comments), but the paper checker site seemingly went down before I could finish... I emailed the publication chairs already but i just wanted to know if anyone else was in the same situation, and if there's anything else I should do.",10,discussion,,True
+1u4obgy,Anomaly Detection vs Classification for Visually Similar Cancer vs Mimics? [P],"I'm working on a paper and would love some input on model choice.
+
+Suppose you're trying to detect a specific type of cancer, but the negative samples are visually and morphologically very similar (i.e., “mimics” of the cancer). In this setting, would it make more sense to approach the problem as:
+
+1. **Anomaly detection** (treating the cancer as the target distribution and everything else as out-of-distribution), or
+2. **Supervised classification** (explicitly learning to distinguish cancer vs. mimics)?",8,discussion,,True
+1u1ew6q,AI Epistemic Risks: Emerging Mechanisms &amp; Evidence [R],"**How will AI affect our ability to think and judge for ourselves?**
+
+Our new paper co-authored by 30 experts explores **epistemic risks**—the threats AI poses to our collective capacity to form beliefs accurately, reason well, and maintain a healthy information environment. 
+
+We look at how AI can lead to harm through these mechanisms:  
+
+* **Persuasion &amp; Manipulation:** AI systems are highly persuasive, opening the door for political/economic manipulation, incitement and radicalization, and other misuse, as well as unintentional harms like AI sycophancy and mental health risks.
+* **Cognitive Offloading:** We may be delegating our thinking to AI at a deeper level than prior technologies, risking long-term degradation of individual and societal cognitive resilience.
+* **Feedback Loops:** Human-AI and AI-AI interactions are narrowing the epistemic space humans and AIs draw from. This already drives homogenization, and may potentially lead to fragmentation and “lock-in” (a self-refer",8,announcement,,True
+1u0119r,Open image generation models are closer to closed-source quality than this sub thinks [D],"I run evaluations on generative image models as part of my workflow, mostly comparing coherence, prompt adherence, and compositional accuracy across different architectures. The consensus here seems to be that open models are still a generation behind closed APIs. Based on my recent benchmarks, that gap is way smaller than people assume.
+
+On compositional control specifically, the latest open checkpoints handle multi-object scenes with spatial relationships about as reliably as the paid endpoints I've tested. Not perfect, but close enough that the failure modes are comparable. The thing that surprised me was text rendering in images, which used to be a disaster on open models. Recent architectures actually get it right roughly 70-80% of the time on short strings.
+
+Generation speed is another misconception. People complain about inference time but I'm getting 2MP outputs in under two minutes on a single consumer GPU. Drop resolution and step count and you're at 30 seconds. Fine for iter",8,analysis,,True
+1tsi17b,Bayesian Opt. GPs vs Linear models and Neural Networks for parameter optimizations [R],"Hi,
+
+Relatively new to deep learning. I wanted some opinions on which of these approaches might be best for time series data and spectral analysis. I currently use a GP and it works pretty well, but I’m wondering what the computational tradeoffs and so forth might be. Any ideas?",9,discussion,,True
+1tp3r2f,EMA-Gated Temporal Sequence Compression in Vision Transformers [P],"Vision Transformers waste 90% of their compute recalculating stationary asphalt. NeuroFlow tracks semantic surprise in embedding space, physically eliminating background tokens before the encoder.
+
+Result: 55.8x wall-clock speedup for ViTs on high-res video (1792p) with 97% fidelity. No fine-tuning required.
+
+NeuroFlow is a dynamic routing framework for Vision Transformer video inference. It exploits temporal redundancy by tracking per-patch semantic surprise via an Exponential Moving Average (EMA) of patch-level embeddings, effectively answering the architectural mismatch between O(N2) self-attention and highly redundant natural video streams.
+
+Key Contributions
+
+* **Architecture C (Dual-Memory Reconstruction):** A completely *training-free* inference engine that combines a Layer 0 Gate with a Layer 12 Cache. It achieves **71.55% zero-shot top-1 accuracy at 84.0% token sparsity** on SigLIP, retaining 92.4% of dense accuracy without modifying any weights.
+* **Architecture B (Extreme Wa",8,analysis,,True
+1tmq1eb,MergeNB: An intuitive merge conflict resolver built for Jupyter notebooks in VS Code [P],"I used to work heavily with Jupyter Notebooks + git + VS Code in a collaborative research setting and found nbdime to be somewhat buggy/a hassle to work with in general.
+
+So, in typical side project fashion ([relevant xkcd](https://xkcd.com/1319/)) I've been working on MergeNB quite a bit over the last 6 months or so. It's (currently only) a VS Code extension with a web UI, and has a few cool improvements over other alternatives, which I outlined in the README/docs site.
+
+I'd be over the moon if this actually gets used by people, and would love a star if it's interesting. See [https://github.com/Avni2000/MergeNB](http://github.com/Avni2000/MergeNB).
+
+I've also been working on a static documentation site here: [https://avni2000.github.io/MergeNB/docs](https://avni2000.github.io/MergeNB/docs)
+
+I'm planning on working on it a lot more over the summer and properly fleshing out a few of the ideas I had (including making it a git mergetool as well as a VS Code extension), so if you'd like to",8,announcement,,True
+1ubvmdx,Best current methods for finetuning whisper on domain specific vocabulary? [P],"Hey everyone,
+
+I’m wondering whether there are any newer or more effective methods for fine tuning whisper on domain specific speech. I’m working on a project where the model needs to reliably detect certain specific words and technical terms. The vocabulary and context are mostly in spanish.
+
+Does anyone have experience with a similar use case? Roughly how many hours of labeled audio would be needed before seeing the model converged?
+
+I know about lora, qlora, and spectrum, but Im curious if there are any newer or better ways to adapt whisper to specific vocabulary.
+
+any help is welcome!",5,discussion,,True
+1ttp5l1,Do you see GNN's playing a meaningful role in astrophysics research? [D],"A bit of background about myself: I have been accepted to RWTH Aachen's Computer Science program starting this fall, and one of the things that I am genuinly excited about is exploring the intersection of astrophysics and machine learning.
+
+The tricky part is that RWTH's CS department doesn't have a research group focused directly on this intersection. The two closest things I have found are the Quantum Information Systems group (I plan to reach out to the them once I am on campus to understand a bit more about them) and the Learning on Graphs group which does foundational GNN research. The second one got me thinking: graph neural networks feel like they could be well-suited to astrophysicla data, things like galaxy formation, cosmic web structure or particle interaction data all seem graph-like (or am I being waaaay too optimistic here?)
+
+So my questions for people who know this space better than I do:
+
+1. Are GNN's already being used in astrophysics research?
+2. What other ML subfiel",8,discussion,,True
+1tprt80,Training GPT-like model on non-language series [R],"I am responsible for a research project that is supposed to train a GPT-like model (Transformer-decoder) with 100M, 250M and 500M model variants.
+
+---
+
+# params
+
+## training dataset
+
+ - 750M tokens
+
+ - vocabulary is \~15k to \~100k tokens (depends on tokenizer settings)
+
+ - \~3% of the vocabulary is used in \~50% of the training tokens (similar to language, where most of the vocabulary is used very sparsely)
+
+## training hyper-params
+
+ - optimizer = AdamW
+
+ - lr = 1e-3 (works the best compared to 1e-2 and 1e-4)
+
+ - betas = \[0.9, 0.95\]
+
+ - effective batch size = 4M tokens
+
+ - epoch = 16
+
+- warmup steps \~200 (approx 1 epoch)
+
+## model hyper-params
+
+ - 16 layers (but variants with up to 48 layers were tested)
+
+ - embedding = flexible to yield 100M, 250M and 500M model
+
+ - MLP size = 4\*n\_embd
+
+ - 16 attention heads
+
+ - context window = 1000
+
+---
+
+# Issue
+
+The model seems to fail to learn the basic auto-regressive behavior. It often gets stuck on generating a single token (no repetitio",6,discussion,,True
+1tncfx9,Call for Papers - Workshop on Efficient Reasoning at COLM 2026 [R],"🌟 Announcing the 2nd Workshop on Efficient Reasoning (ER) at @colm2026 — Oct 9!
+
+📣 We welcome submissions! Submit your work here: [https://openreview.net/group?id=colmweb.org/COLM/2026/Workshop/Efficient\_Reasoning](https://openreview.net/group?id=colmweb.org/COLM/2026/Workshop/Efficient_Reasoning)  
+🗓️  Deadline: July 12, 2026 (AoE)  
+🔗 Website: [https://wdlctc.github.io/efficient-reasoning-2026/](https://wdlctc.github.io/efficient-reasoning-2026/)
+
+💬 Topics include (but aren't limited to):  
+🔹 Multimodal, spatial &amp; embodied reasoning under efficiency constraints  
+🔹 Curating high-quality reasoning datasets under resource constraints  
+🔹 Algorithmic innovations for efficient training &amp; RL fine-tuning  
+🔹 Fast inference: pruning, compression, progressive generation, KV-cache tricks  
+🔹 Benchmarks &amp; theory on time-/space-complexity and faithfulness  
+🔹 Systems to deploy long-CoT or on-device reasoning in the wild  
+🔹 Safety &amp; robustness of efficient reasoning pipelines  ",8,announcement,,True
+1ub1db3,"Studying FLUX in diffusers library was hard, so I built a smaller open-source version [P]","If you've tried to study modern diffusion models by digging through the official diffusers library, you know it can be overwhelming with its complexity and abstractions.
+
+I wanted to simplify FLUX diffusion models, so I built **minFLUX**: a PyTorch implementation focused on its core architecture and math. Here is the project: [https://github.com/purohit10saurabh/minFLUX](https://github.com/purohit10saurabh/minFLUX)
+
+What’s inside:
+
+\- Minimal FLUX.1 + FLUX.2 implementation with VAE and transformer model.
+
+\- Line-by-line mappings to the source HuggingFace diffusers.
+
+\- Training loop (VAE encode → flow matching → velocity MSE)
+
+\- Inference loop (noise → Euler ODE → VAE decode)
+
+\- Shared utilities (RoPE, timestep embeddings)
+
+The most interesting part for me was seeing that FLUX.2 is not just a scaled-up FLUX.1. It improves the transformer blocks, modulation, FFN, VAE normalization, position IDs, etc. The architecture overview of FLUX.2 is attached.
+
+Let me know if you find this inter",7,announcement,,True
+1ub15wf,TSAuditor: A time-series auditing framework [P],"This happened a few months ago when I was working on an analysis project that dealt with time-series data. The dataset was large (10 years of data). I was using a standard profiling tool to check the pipeline. Everything looked fine because the tool reported 3% missing data rate for volume columns.  
+I didn't think much about it because I thought it was noise, as this was my first time working with time-series data, but the downstream models weren't acting right. That's when I thought something was off, and I actually looked at the data and found the 3% missing data was not noise; in fact, it was a 6-day worth of missing data. It didn't stop here, though, as the data also had leakage, and the model hit 99% accuracy. The rolling windows and lag features were also messed up, as the chronological sequence was broken.
+
+Looking back, if I had done proper EDA, this would not have happened. But I decided to make a small validation tool[ ](https://github.com/imann128/tsauditor)called **tsaudit",7,announcement,,True
+1u2mzek,ICMI 2026 Reviews [D],"Did anyone else submit to ACM ICMI 2026?  
+The reviews were recently released, and this is my first time submitting to ICMI, so I'm not very familiar with the acceptance patterns.  
+I submitted a long paper and received the following overall ratings:  
+4 (Probably Accept), 3 (Borderline), 4 (Probably Accept)
+
+The reviewer with the highest stated expertise recommended acceptance, while the borderline reviewer had some concerns about soundness but still considered it a nice contribution.  
+For those who have submitted to or reviewed for ICMI before, how would you interpret these scores? Is a 4/3/4 generally considered competitive after rebuttal, or is it still a long shot?  
+Would appreciate any insights from past authors or reviewers.",7,discussion,,True
+1u1rf09,I Built Paper Deck: A Better Way to Discover AI/ML Papers [P],"I do AI research and keep juggling tabs: new ones on arXiv, trending ones on Hugging Face, famous ones somewhere else again.
+
+https://preview.redd.it/cg32bshjqd6h1.png?width=1919&amp;format=png&amp;auto=webp&amp;s=00055bb8af699061be0bdcff59f2cb8fa9ab38b6
+
+So I built one site that brings them all together. Pick a paper, read it right there, star the ones you want for later, and it remembers where you stopped reading, even if you switch from laptop to phone.  
+
+
+Live: [https://ppdeck.com](https://ppdeck.com)
+
+Demo: [https://youtu.be/vtyx34JvxX0](https://youtu.be/vtyx34JvxX0)
+
+It's free and open source - a star on GitHub would mean a lot ⭐ [https://github.com/khuynh22/paper-deck](https://github.com/khuynh22/paper-deck)",7,announcement,,True
+1tyo8gf,Does it make sense to use alternative quantizations of QAT models? [D],"From TF's website:
+
+&gt; Quantization aware training emulates inference-time quantization, creating a model that downstream tools will use to produce actually quantized models.
+
+So is it designed to work with a very specific quantization method (for Gemma-4, presumably, Google's own)? Or would it make sense to use alternative quantization methods?
+
+According to the benchmarks *unsloth* released, its (alternative) quantizations of Gemma-4-QAT are closer to the QAT fine-tunes, but is this a good thing, or does it defeat the purpose of QAT?",6,discussion,,True
+1twhhnq,Repo for implementations of various Transformer Attn mechanisms [P],"Initially, I developed this so I can easily switch between different Attention mechanisms for my Small Language Model (SLM) experiments and benchmarking. However, I also realized that these implementations can be applicable in Computer Vision, modernize Vision Encoders, RL, and others. I hope this helps researchers, students, or educators in general.
+
+I also included MiniMax M3's sparse attention. This can be integrated with Andrej Karpathy's autoresearch framework.
+
+For contributing: I encourage you to please open a PR. I would like to see and learn implementations of other attention mechanisms I haven't covered in this repo. Thank you!
+
+GitHub Link: [https://github.com/egmaminta/attnhut](https://github.com/egmaminta/attnhut)",5,announcement,,True
+1tqvuz9,"Building a monokernel for LLM inference on AMD MI300X - up to 3,300 output tokens/s per request [P]","We built a monokernel that runs the full decode sequence as one GPU-resident program on AMD MI300X, with some neat optimizations. The die topology is central to the result, we map memory access patterns to the physical layout, compute units group by their associated IOD, and the hardware runs at its full design performance.
+
+Up to 3,300 output tokens/s per request, batch size 1, no speculative decoding, no quantization, on 8x MI300X.
+
+This preview runs a small 2B coding model, and we plan to support large frontier MoE in the future.
+
+Technical deep dive: https://blog.kog.ai/building-a-single-kernel-latency-optimized-llm-inference-engine-on-amd-mi300x-gpus
+
+Try it: https://playground.kog.ai",7,analysis,,True
+1tpgyra,I used the N.E.A.T algorithm to teach AI how to control a worm in my game in making! It uses evolution to improve. [P],"Each brain is unique, and from the best generations that I save, a worm can pick random brain files to use, letting each worm be completely unique and feel alive. This is for Bonk Universe.",6,announcement,,True
+1uaoomx,how to access books3 dataset for research purposes? [R],"as per the title, how to access books3 dataset for research purposes?",5,discussion,,True
+1tzz8ni,How to find research opportunities in area of interest? [D],"Im an undergraduate studying CS at a state school in the US. I’m interested in researching a specific style of self supervised learning (JEPA) and want to eventually go to grad school to study further. I have experience working in a lab similar to this topic, and I’ve become fairly comfortable with the literature and have a basic understanding of what its going on, but right now km only doing applied research in a specific domain (physics).
+
+I hope to eventually go to grad school to study this. But right now my opportunities are kinda limited as my school’s CS department is pretty mid. I was wondering if y’all have any advice on how to approach things? 
+
+I know i can perform research independently but its not ideal due to:  
+1. Limited compute, less resources compared to a proper lab   
+2. Lack of a supervisor/guidance on the nuances of the field
+
+My current lab would be supportive if i do try to do things, but pure ml research is not really their main thing.   
+I’ve heard people do RE",4,discussion,,True
+1ty60zo,Building a Custom Drones MuJoCo Environment [P],"Hi all, Lately I have been working on creating a package for Multi Agent RL based drone environments with different objectives, all bundled into a single GitHub repository: https://github.com/tau-intelligence/MuJoCo-drones-gym
+
+I am currently trying to organize things for RL community people, with a couple more tools coming soon. But right now, I want to make it useful for the community and hence would love some feedback from different people, about how I could improve it, incorporate more things into it or fix some broken implementation. Also everyone is welcome to raise issues on the repo.
+
+Thank you for the support.
+
+PS: I have some research publications at RL and ML venues regarding work on RL, though I still want to consider myself as a student of the field and hence would love your help here.",4,announcement,,True
+1p82cto,[D] Got burned by an Apple ICLR paper — it was withdrawn after my Public Comment.,"So here’s what happened. Earlier this month, a colleague shared an Apple paper on arXiv with me — it was also under review for ICLR 2026. The benchmark they proposed was perfectly aligned with a project we’re working on.
+
+I got excited after reading it. I immediately stopped my current tasks and started adapting our model to their benchmark. Pulled a whole weekend crunch session to finish the integration… only to find our model scoring absurdly low.
+
+I was really frustrated. I spent days debugging, checking everything — maybe I used it wrong, maybe there was a hidden bug. During this process, I actually found a critical bug in their official code:
+
+* When querying the VLM, it only passed in the image path string, not the image content itself.
+
+The most ridiculous part? After I fixed their bug, the model's scores got even lower!
+
+The results were so counterintuitive that I felt forced to do deeper validation. After multiple checks, the conclusion held: fixing the bug actually made the s",1617,analysis,,True
+1rc3nez,[D] Is Conference prestige slowing reducing?,"There are \~4000 papers accepted at CVPR and \~5300 at ICLR.
+
+At this point getting accepted feels like:
+
+“wow I made it 😎”  
+*camera pans to 5000 other Buzz Lightyears at the venue*
+
+This is probably good overall (more access, less gatekeeping, etc.). But I can’t help wondering:
+
+* Does acceptance still *mean* the same thing?
+* Is anyone actually able to keep up with this volume?
+* Are conferences just turning into giant arXiv events?",799,analysis,,True
+1tdje2d,"arXiv implements 1-year ban for papers containing incontrovertible evidence of unchecked LLM-generated errors, such as hallucinated references or results. [N]","From Thomas G. Dietterich (arXiv moderator for cs.LG) on 𝕏 (thread):  
+[https://x.com/tdietterich/status/2055000956144935055](https://x.com/tdietterich/status/2055000956144935055)  
+[https://xcancel.com/tdietterich/status/2055000956144935055](https://xcancel.com/tdietterich/status/2055000956144935055)
+
+""Attention arXiv authors: Our Code of Conduct states that by signing your name as an author of a paper, each author takes full responsibility for all its contents, irrespective of how the contents were generated.
+
+If generative AI tools generate inappropriate language, plagiarized content, biased content, errors, mistakes, incorrect references, or misleading content, and that output is included in scientific works, it is the responsibility of the author(s).
+
+We have recently clarified our penalties for this. If a submission contains incontrovertible evidence that the authors did not check the results of LLM generation, this means we can't trust anything in the paper.
+
+The penalty is a 1-",722,announcement,,True
+1rnajac,[P] VeridisQuo - open-source deepfake detector that combines spatial + frequency analysis and shows you where the face was manipulated,"Salut tout le monde,
+
+Mon coéquipier et moi venons de terminer notre projet de détection de deepfake pour l'université et nous voulions le partager. L'idée a commencé assez simplement : la plupart des détecteurs ne se concentrent que sur les caractéristiques à niveau de pixel, mais les générateurs de deepfake laissent également des traces dans le domaine de la fréquence (artéfacts de compression, incohérences spectraux...). Alors on s'est dit, pourquoi ne pas utiliser les deux ?
+
+**Comment ça fonctionne**
+
+Nous avons deux flux qui fonctionnent en parallèle sur chaque découpe de visage :
+
+* Un EfficientNet-B4 qui gère le côté spatial/visuel (pré-entraîné sur ImageNet, sortie de 1792 dimensions)
+* Un module de fréquence qui exécute à la fois FFT (binning radial, 8 bandes, fenêtre de Hann) et DCT (blocs de 8×8) sur l’entrée, chacun donnant un vecteur de 512 dimensions. Ceux-ci sont fusionnés via un petit MLP en une représentation de 1024 dimensions.
+
+Ensuite, on concatène simplement les d",644,announcement,,True
+1m3v7ll,[R] NeuralOS: a generative OS entirely powered by neural networks,"We built NeuralOS, probably the world's most expensive operating system, running at a blazing 1.8fps on an NVIDIA H100 GPU. 😅
+
+**What exactly is NeuralOS?**
+
+It's an experimental generative OS that predicts every screen frame entirely from your mouse and keyboard inputs. No internet, no traditional software stack, purely hallucinated pixels.
+
+**How does it work?**
+
+* An RNN tracks the computer state (kind of like a traditional OS kernel, but all neural and continuous).
+* A diffusion model generates the actual screen images (imagine a desktop environment, but fully neural-rendered).
+
+The GIF shows a funny demo: NeuralOS running NeuralOS inside itself. Every single pixel you're seeing is model-generated, no network involved at all!
+
+Long-term, our goal is to remove boundaries between software entirely and make OS fully customizable beyond fixed menus and options. Imagine asking your OS something like:
+
+* ""Merge all my messaging apps into one interface.""
+* ""Make Signal look like Messenger",608,announcement,,True
+1tens5n,Backlash against Arxiv's proposed 1 year ban is genuinely perplexing. [D],"Anyone else surprised at the enormous amount of backlash against Arxiv's proposed 1 year ban for authors and coauthors publishing papers with hallucinated reference and other obvious LLM/Gen AI artifacts?  
+[https://x.com/tdietterich/status/2055000956144935055](https://x.com/tdietterich/status/2055000956144935055)  
+[https://xcancel.com/tdietterich/status/2055000956144935055](https://xcancel.com/tdietterich/status/2055000956144935055)
+
+Some of the responses:
+
+1. ""This is the age of AI, Arxiv should be part of the movement instead of holding onto the old ways""
+
+2. ""The P.I. is a macro-manager, not a micro-manager, can't be expected to read every reference that his/her student puts in.""
+
+3. ""I publish 20+ papers a year with my students, how do you expect me to read everything?""
+
+4. ""What about teams with 100s of people? How can you expect the authors to check references?""
+
+5. ""Who reads references in depth anyways!?""
+
+These responses are very revealing how academia works. Apparently peop",595,analysis,,True
+1qo6sai,[D] Some thoughts about an elephant in the room no one talks about,"*Using a throwaway account for obvious reasons.*
+
+I am going to say something uncomfortable. A large fraction of senior researchers today care almost exclusively about publications, and they have quietly outsourced their educational/mentorship responsibility to social media. This year’s ICLR has been a bit of a mess, and while there are multiple reasons, this is clearly part of it. The issue is not just OpenReview leak or AC overload. It is that we have systematically failed to train researchers to reason, and the consequences are now visible throughout the system.
+
+I have been on both sides of the process for so many times, submitting and reviewing, and the same problems appear repeatedly. Many junior researchers, even those with strong publication records, have never received systematic research training. They are not trained in how to think through design choices, reason about tradeoffs, frame contributions, or evaluate ideas in context. Instead, they are trained to optimize outcome",499,analysis,,True
+1r0tw3e,"[D] Ph.D. from a top Europe university, 10 papers at NeurIPS/ICML, ECML— 0 Interviews Big tech","I just wrapped up my CS Ph.D on anomaly detection. Here's my profile in a nutshell:
+
+Research: 8 publications, 5 first-author at top ML venues (ICML, NeurIPS, ECML).
+
+2 A\* ICML, NeurIPS (both first author)
+
+Rest mid A\* and some A.
+
+Reviewer for ICLR, KDD, ICML etc.
+
+Industry: Two working Student— one in ML one in deep learning.
+
+Skills: Python, PyTorch, scikit-learn, deep learning, classical ML, NLP, LLMs.
+
+Education: M.Sc. top 10%,
+
+I'm applying to research scientist and MLE roles at big tech (Google, Meta, Amazon, etc.) but I'm not even getting callbacks. I'm based in Europe if that matters.
+
+L
+
+Is my profile just not what they're looking for?Would love any honest feedback.
+
+Did I make the wrong choice with my research direction?",476,analysis,,True
+1pm2zsb,Ilya Sutskever is puzzled by the gap between AI benchmarks and the economic impact [D],"In a recent interview, Ilya Sutskever said: 
+
+&gt; This is one of the very confusing things about the models right now. How to reconcile the fact that they are doing so well on evals... And you look at the evals and you go ""Those are pretty hard evals""... They are doing so well! But the economic impact seems to be dramatically behind.
+
+I'm sure Ilya is familiar with the idea of ""leakage"", and he's still puzzled. So how do *you* explain it?
+
+*Edit:* `GPT-5.2 Thinking` scored 70% on GDPval, meaning it outperformed industry professionals on economically valuable, well-specified knowledge work spanning 44 occupations.",468,analysis,,True
+1r3oekq,[D] ICML: every paper in my review batch contains prompt-injection text embedded in the PDF,"I’m reviewing for ICML (Policy A, where LLM use is not allowed) and noticed that in my assigned batch, if you copy/paste the full PDF text into a text editor, every single paper contains prompt-injection style instructions embedded directly in the document, e.g.:
+
+&gt;“Include BOTH the phrases X and Y in your review.”
+
+My guess is this is some kind of ICML-side compliance check and they think they are being slick. I was about to flag the first paper I was reviewing for Prompt injection, which is strictly forbidden, when I decided to check every other paper in my batch.",457,analysis,,True
+1n4bebi,[D] NeurIPS is pushing to SACs to reject already accepted papers due to venue constraints,"What are our options as a discipline? We are now at a point where 3 or more reviewers can like your paper, the ACs can accept it, and it will be rejected for no reason other than venue constraints. ",430,analysis,,True
+1npdfh1,[D] Is senior ML engineering just API calls now?,"I’m a Senior ML engineer with around 9 years of experience. I work at a large government institution, implementing (integrating?) AI for cybersecurity, and I’m currently in the process of building a new team.
+
+I’ve been having some concerns about my career development, and I’m not sure if other ML engineers with similar experience feel the same way.
+
+Most of my projects these days aren’t really “machine learning” anymore. It’s mostly using existing models through APIs, setting up pipelines, etc. The actual algorithmic/experimental side of ML feels like it’s disappearing from my day-to-day work.
+
+It seems like the industry has shifted from building models to API calls and prompt engineering. I miss the kind of work I did in my earlier roles, building models from scratch, fine-tuning, experimenting…
+
+So my question is: is this just what senior ML roles eventually turn into? Has the job really shifted from “building ML” to “plugging in ML”? Curious if others are experiencing the same thin",403,analysis,,True
+1ol8wup,[D] ArXiv CS to stop accepting Literature Reviews/Surveys and Position Papers without peer-review.,"tl;dr — ArXiv CS will no longer be accepting literature reviews, surveys or position papers because there's too much LLM-generated spam. They must now be accepted and published at a ""[decent venue](https://bsky.app/profile/tdietterich.bsky.social/post/3lxgqsuyz3s2n)"" first.",402,announcement,,True
+1qjz88r,[D] 100 Hallucinated Citations Found in 51 Accepted Papers at NeurIPS 2025,"[https://gptzero.me/news/neurips](https://gptzero.me/news/neurips)
+
+[I remember this was shared last month about ICLR where they found hallucinations in submitted papers, but I didn't expect to see them in accepted papers as well](https://preview.redd.it/4td8bz45hxeg1.png?width=1608&amp;format=png&amp;auto=webp&amp;s=3d14e0e80c0d0589c199d06e9b284219032e57ce)",396,announcement,,True
+1mo0ynr,[R] Position: The Current AI Conference Model is Unsustainable!,"
+Paper: https://www.alphaxiv.org/abs/2508.04586v1  
+
+
+📈 Publication Surge: Per-author publication rates have more than doubled over the past decade to over 4.5 papers annually.  
+
+
+🚀 Exponential Output Growth: Individual contributions are rising so fast they’re projected to exceed one paper per month by the 2040s.  
+
+
+🌍 Carbon Overload: NeurIPS 2024’s travel emissions (&gt;8,254 tCO₂e) alone surpass Vancouver’s daily citywide footprint.  
+
+
+😞 Mental Health Toll: Of 405 Reddit threads on AI conferences, over 71% are negative and 35% mention mental-health concerns.  
+
+
+⏳ Research-Conference Mismatch: The AI research lifecycle outpaces conference schedules, often rendering results outdated before presentation.  
+
+
+🏟️ Venue Capacity Crisis: Attendance at top AI conferences like NeurIPS 2024 is already outstripping available venue space.",392,announcement,,True
+1tgmwqr,Reviving PapersWithCode (by Hugging Face) [P],"Hi,
+
+Niels here from the open-source team at Hugging Face. Like many others, I was a huge fan of paperswithcode. Sadly, that website is no longer maintained after its acquisition by Meta.
+
+Hence, I've been working on reviving it. I obviously use AI agents to parse papers at scale and automatically generate leaderboards (for now I'm the one verifying results). So far, I've only parsed high-impact papers for which I know they're SOTA, like Qwen 3.5 and 3.6, RF-DETR for object detection, DINOv3, SOTA embedding models from the MTEB leaderboard, the Open ASR Leaderboard for automatic speech recognition models, etc.
+
+For now, it includes the following:
+
+* trending papers by default based on Github star velocity
+* categorization by domain, e.g., [OCR](https://paperswithcode.co/tasks/ocr)
+* [methods](https://paperswithcode.co/methods), which PwC used to have, e.g., [RLVR](https://paperswithcode.co/methods/rlvr)
+* eval results for high-impact papers, see e.g., [Qwen 3.5](https://paperswithcode.",385,announcement,,True
+1ru7bnz,"[P] I got tired of PyTorch Geometric OOMing my laptop, so I wrote a C++ zero-copy graph engine to bypass RAM entirely.","If you train Graph Neural Networks on large datasets (like Papers100M), you already know the pain: trying to load the edge list and feature matrix usually results in an instant 24GB+ OOM allocation crash before the GPU even gets to do any work.
+
+I just open-sourced **GraphZero v0.2**, a custom C++ data engine I built to fix this by bypassing system RAM entirely.
+
+**How it works:** Standard libraries try to load everything into memory. GraphZero instead compiles your raw CSVs into two highly optimized binary formats (`.gl` for topology, `.gd` for features).
+
+It then uses POSIX `mmap` to memory-map the massive files directly from the SSD. Using `nanobind`, the C++ engine hands the raw memory pointers directly to PyTorch as zero-copy NumPy arrays.
+
+During a training loop (like GraphSAGE), PyTorch thinks it has a 50GB tensor sitting in RAM. When it indexes a batch of target nodes, it triggers an OS Page Fault. The operating system automatically fetches *only* the required 4KB blocks from t",377,announcement,,True
+1p01c70,[D] Tsinghua ICLR paper withdrawn due to numerous AI generated citations,"Was browsing the ICLR withdrawn papers today:
+
+* Reviewers claiming [optimal transport is not related to machine learning](https://openreview.net/forum?id=L0DTflYss0)
+* Reviewers not reading the paper and the authors [withdrawing due to disappointment in ICLR review quality](https://openreview.net/forum?id=1jXc6SHcUV)
+* Clearly [AI generated reviews](https://openreview.net/forum?id=KFSv2egats&amp;noteId=v6noqyB4Ss)
+
+But [this one stood out to me](https://openreview.net/forum?id=33zbWwsPI1), a paper led by two Tsinghua professors (a top university of China) who were formerly both MIT PhDs, which has the dubious honor of being called out by all four reviewers for AI generated citations and references. If this is the quality of research we can expect by the top institutions, what does this say about the fields current research culture, the research quality, and the degree of supervision advisors are exercising on the students?",367,analysis,,True
+1q6cb0k,"[R] DeepSeek-R1’s paper was updated 2 days ago, expanding from 22 pages to 86 pages and adding a substantial amount of detail.",arXiv:2501.12948 \[cs.CL\]: [https://arxiv.org/abs/2501.12948](https://arxiv.org/abs/2501.12948),363,announcement,,True
+1ln4omn,"[R] LSTM or Transformer as ""malware packer""","An alternative approach to EvilModel is packing an entire program’s code into a neural network by intentionally exploiting the overfitting phenomenon. [I developed a prototype](https://github.com/piotrmaciejbednarski/lstm-memorizer) using PyTorch and an LSTM network, which is intensively trained on a single source file until it fully memorizes its contents. Prolonged training turns the network’s weights into a data container that can later be reconstructed.
+
+The effectiveness of this technique was confirmed by generating code identical to the original, verified through SHA-256 checksum comparisons. Similar results can also be achieved using other models, such as GRU or Decoder-Only Transformers, showcasing the flexibility of this approach.
+
+The advantage of this type of packer lies in the absence of typical behavioral patterns that could be recognized by traditional antivirus systems. Instead of conventional encryption and decryption operations, the “unpacking” process occurs as part o",345,announcement,,True
+1s7m7rn,[D] thoughts on the controversy about Google's new paper?,"Openreview: [https://openreview.net/forum?id=tO3ASKZlok](https://openreview.net/forum?id=tO3ASKZlok)
+
+It's sad to see almost no one mention this on Reddit and people are being mean to people who point out concerns
+
+  
+Edit: google is allegedly doing this in their trending TurboQuant paper
+
+1. Did not attribute a pervious work RaBitQ fully
+
+2. Did unfair comparison with RaBitQ (single core CPU vs GPU)
+
+",336,analysis,,True
+1m95ej0,"[R] NeurIPS 2025 D&amp;B: ""The evaluation is limited to 15 open-weights models ... Score: 3""","I'm pretty shocked how the only reviewer criticism on our benchmark paper (3.5/6) was that our paper included *only* 15 open weights models and that we didn't evaluate our benchmark on SoTA commercial models (that would cost \~10-15k $ to do).
+
+I mean how superficial does it get to reject a paper not because something is wrong about its design or that it isn't a novel/useful benchmark, but because we don't want to pay thousands of dollars to OpenAI/Google/Anthropic to evaluate (and promote) their models.
+
+How academic is it to restrict the ability to publish to the big labs / companies in wealthy countries that have the money lying around to do that?!",334,analysis,,True
+1lkmkuw,"[D] Alarming amount of schizoid people being validated by LLMs, anyone else experienced this?","I've had more experiences in the last couple of weeks encountering people with very strong schizoid traits than I have in the last few years around artificial intelligence machine learning etc, but really around the use of large language models. 
+
+
+I've met five different people online in the last 3 weeks who have messaged me on discord or read it asking for help with a project, only to be immediately sent a three paragraph chat bot summary and 400 lines of pseudo python. When I ask for them to explain their project they become defensive and tell me that the LLM understands the project so I just need to read over the code ""as an experienced Dev"" (I only have foundational knowledge, 0 industry experience).
+
+
+Or other times where I've had people message me about a fantastic proof or realisation that have had that is going to revolutionise scientific understanding, and when I ask about it they send walls of LLM generated text with no ability to explain what it's about, but they are comple",324,analysis,,True
+1pvmrx9,[D] Best papers of 2025,"Which papers do you think are the most important ones which were released in 2025?
+
+Please, provide a link to the paper if you share one.",310,discussion,,True
+1ookxb0,[R] Knowledge Graph Traversal With LLMs And Algorithms,"Hey all. After a year of research, I've published a GitHub repository containing Knowledge Graph Traversal algorithms for retrieval augmented generation, as well as for LLM traversal. The code is MIT licensed, and you may download/clone/fork the repository for your own testing.
+
+In short, knowledge graph traversal offers significant advantages over basic query similarity matching when it comes to retrieval augmented generation pipelines and systems. By moving through clustered ideas in high dimensional semantic space, you can retrieve much deeper, richer information based on a thought trail of understanding. There are two ways to traverse knowledge graphs in the research:
+
+\- LLM directly (large language model actually traverses the knowledge graph unsupervised)  
+\- Algorithmic approach (various algorithms for efficient, accurate traversal for retrieval)
+
+If you get any value out of the research and want to continue it for your own use case, please do! Maybe drop a star on GitHub as w",316,announcement,,True
+1q11e11,[R] New paper by DeepSeek: mHC: Manifold-Constrained Hyper-Connections,"Paper: mHC: Manifold-Constrained Hyper-Connections  
+Zhenda Xie, Yixuan Wei, Huanqi Cao, Chenggang Zhao, Chengqi Deng, Jiashi Li, Damai Dai, Huazuo Gao, Jiang Chang, Liang Zhao, Shangyan Zhou, Zhean Xu, Zhengyan Zhang, Wangding Zeng, Shengding Hu, Yuqing Wang, Jingyang Yuan, Lean Wang, Wenfeng Liang  
+Abstract: Recently, studies exemplified by Hyper-Connections (HC) have extended the ubiquitous residual connection paradigm established over the past decade by expanding the residual stream width and diversifying connectivity patterns. While yielding substantial performance gains, this diversification fundamentally compromises the identity mapping property intrinsic to the residual connection, which causes severe training instability and restricted scalability, and additionally incurs notable memory access overhead. To address these challenges, we propose Manifold-Constrained Hyper-Connections (mHC), a general framework that projects the residual connection space of HC onto a specific man",310,announcement,,True
+1ovm4fd,[R] LeJEPA: New Yann Lecun paper,"Abstract: Learning manipulable representations of the world and its dynamics is central to AI. Joint-Embedding Predictive Architectures (JEPAs) offer a promising blueprint, but lack of practical guidance and theory has led to ad - hoc R&amp;D. We present a comprehensive theory of JEPAs and instantiate it in LeJEPA, a lean, scalable, and theoretically grounded training objective. First, we identify the isotropic Gaussian as the optimal distribution that JEPAs’ embeddings should follow to minimize downstream prediction risk. Second, we introduce a novel objective–Sketched Isotropic Gaussian Regularization (SIGReg)–to constrain embeddings to reach that ideal distribution. Combining the JEPA predictive loss with SIGReg yields LeJEPA with numerous theoretical and practical benefits: (i) single trade - off hyperparameter, (ii) linear time and memory complexity, (iii) stability across hyper-parameters, architectures (ResNets, ViTs, ConvNets) and domains, (iv) heuristics-free, e.g., no stop -g",311,announcement,,True
+1rr7vup,[D] Can we stop glazing big labs and universities?,"I routinely see posts describing a paper with 15+ authors, the middlemost one being a student intern at Google, described in posts as ""Google invents revolutionary new architecture..."" Same goes for papers where some subset of the authors are at Stanford or MIT, even non-leads. 
+
+1. Large research orgs aren't monoliths. There are good and weak researchers everywhere, even Stanford. Believe it or not, a postdoc at a non-elite university might indeed be a stronger and more influential researcher than a first-year graduate student at Stanford.
+
+2. It's a good idea to judge research on its own merit. Arguably one of the stronger aspects of the ML research culture is that advances can come from anyone, whereas in fields like biology most researchers and institutions are completely shut out from publishing in Nature, etc.
+
+3. Typically the first author did the majority of the work, and the last author supervised. Just because author N//2 did an internship somewhere elite doesn't mean that th",304,analysis,,True
+1sj6sas,"""There's a new generation of empirical deep learning researchers, hacking away at whatever seems trendy, blowing with the wind"" [D]","Saw this on X.
+
+I too am struggling with the term post agentic ai just posting here for further discussion.",296,discussion,,True
+1sz14mi,An interactive semantic map of the latest 10 million published papers [P],"I built a map to help navigate the complex scientific landscape through spatial exploration.
+
+How it works:
+
+Sourced the latest 10M papers from OpenAlex and generated embeddings using SPECTER 2 on titles and abstracts.
+
+Reduced dimensionality with UMAP, then applied Voronoi partitioning on density peaks to create distinct semantic neighborhoods. 
+
+The floating topic labels are generated via custom labelling algorithms (definitely still a work in progress!). 
+
+There is also support for both keyword and semantic queries, and there's an analytics layer for ranking institutions, authors, and topics etc. 
+
+For anyone who wants to try the interactive map, it is free to use at [The Global Research Space](https://globalresearchspace.com/space#7.02/-4.771/61.204/-52.6/30)
+
+Any feedback or suggestions is welcome!",300,announcement,,True
+1r02y6y,[P] A Python library processing geospatial data for GNNs with PyTorch Geometric,"I'd like to introduce [**City2Graph**](https://github.com/city2graph/city2graph)**,** a Python library that converts geospatial data into tensors for GNNs in PyTorch Geometric.
+
+This library can construct heterogeneous graphs from multiple data domains, such as 
+
+* **Morphology**: Relations between streets, buildings, and parcels
+* **Transportation**: Transit systems between stations from GTFS
+* **Mobility**: Origin-Destination matrix of mobility flow by people, bikes, etc.
+* **Proximity**: Spatial proximity between objects
+
+It can be installed by
+
+`pip install city2graph`
+
+`conda install city2graph -c conda-forge`
+
+For more details, 
+
+* 💻 **GitHub**: [https://github.com/c2g-dev/city2graph](https://github.com/c2g-dev/city2graph)
+* 📚 **Documentation**: [https://city2graph.net](https://city2graph.net/)",291,announcement,,True
+1q0cmvw,[P] My DC-GAN works better then ever!,"I recently made a Deep Convolutional Generative adviseral Network which had some architecture problem at the starting but now it works . It still takes like 20mins for 50 epochs . Here are some images It generated. 
+
+I want to know if my architecture can be reduced to make it less gpu consuming.",289,announcement,,True
+1pcaxi3,[D] Published paper uses hardcoded seed and collapsed model to report fraudulent results,"Inspired by [an earlier post](https://www.reddit.com/r/MachineLearning/comments/1p82cto/d_got_burned_by_an_apple_iclr_paper_it_was/) that called out an Apple ICLR paper for having an egregiously low quality benchmark, I want to mention a similar experience I had with a paper that also egregiously misrepresented its contributions. I had contacted the authors by raising an issue on their paper's github repository, publicly laying out why their results were misrepresented, but they deleted their repository soon after.
+
+Fraudulent paper: [https://aclanthology.org/2024.argmining-1.2/](https://aclanthology.org/2024.argmining-1.2/)
+
+Associated repository (linked to in paper): [https://web.archive.org/web/20250809225818/https://github.com/GIFRN/Scientific-Fraud-Detection](https://web.archive.org/web/20250809225818/https://github.com/GIFRN/Scientific-Fraud-Detection)
+
+Problematic file in repository: [https://web.archive.org/web/20250809225819/https://github.com/GIFRN/Scientific-Fraud-Detection/",293,analysis,,True
+1s3j3ef,[D] Is LeCun’s $1B seed round the signal that autoregressive LLMs have actually hit a wall for formal reasoning?,"I’m still trying to wrap my head around the [Bloomberg news](https://www.bloomberg.com/news/articles/2026-03-10/yann-lecun-s-new-ai-startup-raises-1-billion-in-seed-funding) from a couple of weeks ago. A $1 billion seed round is wild enough, but the actual technical bet they are making is what's really keeping me up.  
+  
+LeCun has been loudly arguing for years that next-token predictors are fundamentally incapable of actual planning. Now, his new shop, [Logical Intelligence](https://logicalintelligence.com/), is attempting to completely bypass Transformers to generate mathematically verified code using Energy-Based Models. They are essentially treating logical constraints as an energy minimization problem rather than a probabilistic guessing game.  
+  
+It sounds beautiful in theory for AppSec and critical infrastructure where you absolutely cannot afford a hallucinated library. But practically? We all know how notoriously painful EBMs are to train and stabilize. Mapping continuous ene",284,analysis,,True
+1nwhihj,[N] Stanford is updating their Deep Learning course on YouTube,"This is a [great opportunity](https://www.youtube.com/watch?v=_NLHFoVNlbg) for all ML/DL students/practitioners to either start learning from scratch or filling knowledge gap, time to start learning folks.",281,announcement,,True
+1s6uqns,[P] Built an open source tool to find the location of any street picture,"Hey guys,
+
+Thank you so much for your love and support regarding Netryx Astra V2 last time. Many people are not that technically savvy to install the GitHub repo and test the tool out immediately so I built a small web demo covering a 10km radius of New York, it's completely free and uses the same pipeline as the repo.
+
+I have limited the number of credits since each search consumes GPU costs, but if that's an issue you can install the repo and index any city you want with unlimited searches.
+
+I would accept any feedback include searches that failed or didn't work for you. The site works best on desktop
+
+Web demo link: https://www.netryx.live
+
+Repo link: https://github.com/sparkyniner/Netryx-Astra-V2-Geolocation-Tool",275,announcement,,True
+1ojeldl,[D]NLP conferences look like a scam..,"Not trying to punch down on other smart folks, but honestly, I feel like most NLP conference papers are kinda scams. Out of 10 papers I read, 9 have zero theoretical justification, and the 1 that does usually calls something a *theorem* when it’s basically just a lemma with ridiculous assumptions.  
+And then they all cliam about like a 1% benchmark improvement using methods that are impossible to reproduce because of the insane resource constraints in the LLM world.. Even more funny, most of the benchmarks and made by themselves ",271,analysis,,True
+1tfh2s9,Program misleading high school students into paying to perform academic misconduct in ML Research [D],"I was browsing OpenReview and I came accross this person called Kevin Zhu [https://openreview.net/profile?id=\~Kevin\_Zhu3](https://openreview.net/profile?id=~Kevin_Zhu3), lets say I was impressed when I saw 158 publications and 468 coauthors, and out of curiosity I searched up his afflication ([https://algoverseairesearch.org/](https://algoverseairesearch.org/))
+
+Turns out it is a paid program, and most interesting it is marketed towards **high school students.** They have a whole column of papers listed as **Neurips publications** (their website states: 289 Algoverse Students Accepted to NeurIPS 2025). I was originally unware of the rigor of Neurips workshops and I was understandably very shocked.
+
+I skimmed through four of their papers one by one. Every single one had errors that would be caught by opening the PDF and reading it once. I am completely unsure how they are not caught by reviewers even at a workshop.
+
+[https://openreview.net/forum?id=21pxWVRoPL](https://openreview.net/f",270,analysis,,True
+1o1jdd7,[D] Bad Industry research gets cited and published at top venues. (Rant/Discussion),"Just a trend I've been seeing. Incremental papers from Meta, Deepmind, Apple, etc. often getting accepted to top conferences with amazing scores or cited hundreds of times, however the work would likely never be published without the ""industry name"". Even worse, sometimes these works have apparent flaws in the evaluation/claims. 
+
+Examples include:
+Meta Galactica LLM: Got pulled away after just 3 days for being absolutely useless. Still cited 1000 times!!!!! (Why do people even cite this?)
+
+Microsoft's quantum Majorana paper at Nature (more competitive than any ML venue), while still having several faults and was retracted heavily. This paper is infamous in the physics community as many people now joke about Microsoft quantum.
+
+Apple's illusion of thinking. (still cited a lot) (Arguably incremental novelty, but main issue was the experimentation related to context window sizes)
+
+Alpha fold 3 paper: Was accepted without any code/reproducibility initially at Nature got highly critiqued f",270,analysis,,True
+1qd696s,"Nvidia: End-to-End Test-Time Training for Long Context aka Being Able To Update A Model's Weights In Real-Time As You Use It | ""TTT changes the paradigm from retrieving info to learning it on the fly...the TTT model treats the context window as a dataset &amp; trains itself on it in real-time."" [R]","####TL;DR:
+The paper describes a mechanism that essentially turns the context window into a training dataset for a ""fast weight"" update loop:
+
+ * **Inner Loop:** The model runs a mini-gradient descent on the context during inference. It updates specific MLP layers to ""learn"" the current context.
+ * **Outer Loop:** The model's initial weights are meta-learned during training to be ""highly updateable"" or optimized for this test-time adaptation
+
+**From the Paper:** ""Overall, our empirical observations strongly indicate that TTT-E2E should produce the same trend as full attention for scaling with training compute in large-budget production runs.""
+
+
+
+
+---
+
+
+
+####Abstract:
+
+&gt;We formulate long-context language modeling as a problem in continual learning rather than architecture design. Under this formulation, we only use a standard architecture a Transformer with sliding-window attention. 
+&gt;
+&gt;**However, our model continues learning at test time via next-token prediction on the given ",267,announcement,,True
+1r7ruu8,"[D] We tested the same INT8 model on 5 Snapdragon chipsets. Accuracy ranged from 93% to 71%. Same weights, same ONNX file.","We've been doing on-device accuracy testing across multiple Snapdragon SoCs and the results have been eye-opening.
+
+Same model. Same quantization. Same ONNX export. Deployed to 5 different chipsets:
+
+|Device|Accuracy|
+|:-|:-|
+|Snapdragon 8 Gen 3|91.8%|
+|Snapdragon 8 Gen 2|89.1%|
+|Snapdragon 7s Gen 2|84.3%|
+|Snapdragon 6 Gen 1|79.6%|
+|Snapdragon 4 Gen 2|71.2%|
+
+Cloud benchmark reported 94.2%.
+
+The spread comes down to three things we've observed:
+
+1. **NPU precision handling** — INT8 rounding behavior differs across Hexagon generations. Not all INT8 is created equal.
+2. **Operator fusion differences** — the QNN runtime optimizes the graph differently per SoC, sometimes trading accuracy for throughput.
+3. **Memory-constrained fallback** — on lower-tier chips, certain ops fall back from NPU to CPU, changing the execution path entirely.
+
+None of this shows up in cloud-based benchmarks. You only see it when you run on real hardware.
+
+Curious if others are seeing similar drift across chipset",264,analysis,,True
+1sun588,There Will Be a Scientific Theory of Deep Learning [R],"Hi, all! I'm the lead author on this ambitious (14-author!) perspective paper on deep learning theory. We've all been working seriously, and more or less exclusively, on deep learning for many years now. We believe that a theory is emerging, and we pull together five lines of evidence in recent research into a portrait of the nascent science. Hoping to galvanize better scientific research into how and why these wild, huge learning systems work at all.
+
+The five lines of evidence are:  
+ \- solvable toy settings  
+ \- insightful limits  
+ \- simple empirical laws  
+ \- theories of hyperparameters  
+ \- universal phenomena
+
+See the paper for examples of each and contextualizing analogs from physics.
+
+\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~\~
+
+Paper: [https://arxiv.org/abs/2604.21691](https://arxiv.org/abs/2604.21691)
+
+Explanatory tweet thread here: [https://x.com/learning\_mech/status/2047723849874330047](https://x.com/learning_mech/status/2047723849874330047",263,announcement,,True
+1r5gogk,Can we stop these LLM posts and replies? [D],I am tired of reading all these clearly LLM generated ‘I implemented XYZ in python’ and nonsensical long replies on this subreddit. They add absolutely zero value and just creates meaningless noise. Can we block these posts and replies?,257,analysis,,True
+1n4y2y3,[D] Huawei’s 96GB GPU under $2k – what does this mean for inference?,"Looks like Huawei is putting out a 96GB GPU for under $2k. NVIDIA’s cards with similar memory are usually $10k+. From what I’ve read, this one is aimed mainly at inference.
+
+Do you think this could actually lower costs in practice, or will the real hurdle be software/driver support? ",252,analysis,,True
+1sbzxwn,[D] Those of you with 10+ years in ML — what is the public completely wrong about?,For those of you who've been in ML/AI research or applied ML for 10+ years — what's the gap between what the public thinks AI is doing vs. what's actually happening at the frontier? What are we collectively underestimating or overestimating?,241,discussion,,True
+1tfv0vh,Slop is making me feel disconnected from AI Research [D],"Hello everyone. This is just a small rant on my part. I’m relatively young, a final year undergrad, and I’ve been interested in AI researcher since I was in high school. Over that period of time I feel there has been a significant shift in the landscape regarding the culture surrounding the research. 
+
+While I’ve really enjoyed producing some interesting and creative work, I can’t help but feel that slowly the wave of low quality AI research and researchers are really making me feel frustrated. To just give a summary of what I and many others have seen:
+
+\- Papers with hallucinated citations and even prompts contained in the papers   
+\- Papers with clearly misleading data that does not tell the whole picture.  
+\- Labs who have built a culture around quantity over quality, pumping out pubs, citing each other, and having all of the lab on each paper to inflate each students publication record.   
+\- Highschoolers…. Yes HIGHSCHOOLERS, becoming more common submitting at conferences that ",245,analysis,,True
+1rsdify,[D] What is even the point of these LLM benchmarking papers?,"Lately, NeurIPS and ICLR are flooded with these LLM benchmarking papers. All they do is take a problem X and benchmark a bunch of propriety LLMs on this problem. My main question is these proprietary LLMs are updated almost every month. The previous models are deprecated and are sometimes no longer available. By the time these papers are published, the models they benchmark on are already dead. 
+
+
+
+So, what is the point of such papers? Are these big tech companies actually using the results from these papers to improve their models?",239,analysis,,True
+1rl9j3s,"[D] A mathematical proof from an anonymous Korean forum: The essence of Attention is fundamentally a d^2 problem, not n^2. (PDF included)","
+Hello, r/MachineLearning . I am just a regular user from a Korean AI community (""The Singularity Gallery""). I recently came across an anonymous post with a paper attached. I felt that the mathematical proof inside was too important to be buried in a local forum and not go viral globally, so I used Gemini to help me write this English post to share it with you all.
+
+The author claims they do not work in the LLM industry, but they dropped a paper titled: ""The d\^2 Pullback Theorem: Why Attention is a d\^2-Dimensional Problem"".
+
+They argue that the field has been fundamentally misunderstanding the intrinsic geometry of Attention. Here is the core of their mathematical proof:
+
+The d\^2 Pullback Theorem (The Core Proof):
+
+The author mathematically proves that if you combine the Forward pass (n X n) and the Backward gradient (n X n), the actual optimization landscape the parameter explores is strictly d\^2-dimensional. The n X n bottleneck is merely an illusion caused by the softmax normali",234,announcement,,True
+1m74ugv,[D] - NeurIPS'2025 Reviews,"Hey everyone,
+
+NeurIPS 2025 reviews should be dropping soon (July 24th AoE), and I thought it might be a good idea to start a thread where we can share our thoughts, experiences, and reactions.
+
+Feel free to post your initial impressions, any surprises (good or bad), questions about rebuttals, or just how you’re feeling about the process this year. Whether it’s your first submission or your tenth, you’re not alone in the rollercoaster.
+
+Let’s keep things constructive and supportive. Good luck to all!",235,discussion,,True
+1qi8twv,[P] I Gave Claude Code 9.5 Years of Health Data to Help Manage My Thyroid Disease,"I have episodic Graves' disease, which has been difficult b/c its not chronic. Meds are up and down and often lag when the actual onset occurs
+
+I fed Claude 9.5 years of my Apple Watch and Whoop data, and tasked it to build an ML model (ended up with XGBoost after I tasked it to run every ML model, ran for over 1 hr) to detect these phases. It hit \~98% validation accuracy and now acts as a personal risk assessor, alerting me 3-4 weeks before symptoms even appear. Backtested it on my last episode, and it would've given me a heads-up in early August before labs confirmed it at the end of the month. I was pretty blown away by this, it even made some very novel approach shift decisions. 
+
+Turned it into a simple iOS app I can check whenever. I wrote this article given alot of interest I saw in emulating this along with the repo w/ claude code setup open sourced. Hope this helps
+
+[https://medium.com/data-science-collective/i-gave-claude-code-9-5-years-of-health-data-to-help-manage-my-thyro",234,announcement,,True
+1mfi8li,[R] From Taylor Series to Fourier Synthesis: The Periodic Linear Unit,"**Full Example Runs as Videos:** [https://www.youtube.com/playlist?list=PLaeBvRybr4nUUg5JRB9uMfomykXM5CGBk](https://www.youtube.com/playlist?list=PLaeBvRybr4nUUg5JRB9uMfomykXM5CGBk)
+
+Hello! My name is Shiko Kudo; you might have seen me on r/stablediffusion some time back if you're a regular there as well, where I published a vocal timbre-transfer model around a month ago.
+
+...I had been working on the next version of my vocal timbre-swapping model, but as I had been working on it, I realized that in the process I had something really interesting in my hands. Slowly I built it up more, and in the last couple of days I realized that I had to share it no matter what.
+
+This is the Periodic Linear Unit (PLU) activation function, and with it, some fairly large implications.
+
+The paper and code is available on Github here:  
+[https://github.com/Bill13579/plu\_activation/blob/main/paper.pdf](https://github.com/Bill13579/plu_activation/blob/main/paper.pdf)  
+[https://github.com/Bill13579/plu\_a",231,announcement,,True
+1m5qudf,[D] Gemini officially achieves gold-medal standard at the International Mathematical Olympiad,"https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/
+
+&gt;This year, our advanced Gemini model operated end-to-end in natural language, producing rigorous mathematical proofs directly from the official problem descriptions – all within the 4.5-hour competition time limit.",229,announcement,,True
+1sdmn97,[D] How to break free from LLM's chains as a PhD student?,"I didn't realize but over a period of one year i have become overreliant on ChatGPT to write code, I am a second year PhD student and don't want to end up as someone with fake ""coding skills"" after I graduate. I hear people talk about it all the time that use LLM to write boring parts of the code, and write core stuff yourself, but the truth is, LLMs are getting better and better at even writing those parts if you write the prompt well (or at least give you a template that you can play around to cross the finish line). Even PhD advisors are well convinced that their students are using LLMs to assist in research work, and they mentally expect quicker results. I am currently trying to cope with imposter syndrome because my advisor is happy with my progress. But deep down I know that not 100% of it is my own output. I have started feeling like LLMs have tied my hands so tightly that I can't function without them.
+
+What would be some strategies to reduce the dependency on LLM for work?",226,discussion,,True
+1r8y1ha,[R] Analysis of 350+ ML competitions in 2025,"I run mlcontests.com, a website that lists machine learning competitions from across multiple platforms - Kaggle, AIcrowd, Zindi, Codabench, Tianchi, etc…
+
+Like previous years, I’ve just written up a summary of last year’s competitions and winning solutions. 
+
+With help from several of the competition platforms, I tracked down around 400 competitions that happened last year, as well as info on the #1 winning solution for 73 of those. 
+
+Some highlights:
+
+* Tabular data competitions are starting to show potential signs of change: after years of gradient-boosted decision trees dominating, AutoML packages (specifically AutoGluon) and tabular foundation models (TabPFN) were used in some winning solutions. Having said that, GBDTs (in particular, XGBoost and LightGBM, and to a slightly lesser extent, Catboost) were still the go-to for most tabular problems, sometimes in an ensemble with a neural net. One winner used TabM. 
+* Compute budgets are growing! At the extreme high end, one team (of N",224,analysis,,True
+1ms9d2u,[R] Dino v3: Self-supervised learning for vision at unprecedented scale,"New SOTA for self supervised learning in computer vision. They train a 7B self supervised ViT on 1.7B images, which hits SOTA with linear probing on most downstream tasks. They also release scaled and distilled versions of the model (ViT small, base, large, and huge, plus ConvNext tiny, small, base, and large), along with a version trained on satellite imagery.
+
+There are plenty of details in the paper as to what pretraining improvements they made over DINO v2. ",220,announcement,,True
+1qno68x,Advice for PhD students in this Al slop paper era - I feel academia needs serious revisions! [D],"Looking at 30k submissions at a single conference venue and also recent AI written paper with AI written reviews - I'm seriously worried about where this is heading.
+
+i decided to pursue a PhD because I really liked working on papers for months, get very interesting clinical findings and then present it really well. But I feel that it is dead now. All recent papers I read in my field are just slops and there is no real work coming out worth reading. Even if there is, it gets lost in the pile.
+
+What advice do you want to give to PhD students like me on how to maximize their PhD as just getting papers at venues is a lost dream. My aim is to get into a big tech, working on real problems.",220,analysis,,True
+1rq6g08,How I topped the Open LLM Leaderboard using 2x 4090 GPUs - Research notes in Blog form,"A few years ago, I found that duplicating a specific block of 7 middle layers in Qwen2-72B, without modifying any weights, improved performance across all Open LLM Leaderboard benchmarks and took #1 place. As of 2026, the top 4 models on that leaderboard are still descendants.
+
+The weird finding: single-layer duplication does nothing. Too few layers, nothing. Too many, it gets worse. Only circuit-sized blocks of \~7 layers work. This suggests pre-training carves out discrete functional circuits in the layer stack that only work when preserved whole.
+
+The whole thing was developed on 2x RTX 4090s in my basement; you don't need massive compute to make real progress!
+
+I'm now running current models (GLM-4.7, Qwen3.5, MiniMax M2.5) on this dual GH200 rig (see my other posts). Code and new models coming soon, including special RYS versions of Qwen3.5 27B and 35A3B
+
+Happy to answer questions.
+
+I don't write papers any more, so here is a [full technical write-up in Blog format for your enjoym",218,analysis,,True
+1soj65c,Zero-shot World Models Are Developmentally Efficient Learners [R],"Today's best AI needs orders of magnitude more data than a human child to achieve visual competence.
+
+The paper introduces the Zero-shot World Model (ZWM), an approach that substantially narrows this gap. Even when trained on a single child's visual experience, BabyZWM matches state-of-the-art models on diverse visual-cognitive tasks – with no task-specific training, i.e., zero-shot.
+
+The work presents a blueprint for efficient and flexible learning from human-scale data, advancing a path toward data-efficient AI systems.
+
+
+
+Full Twitter post: [https://x.com/khai\_loong\_aw/status/2044051456672838122?s=20](https://x.com/khai_loong_aw/status/2044051456672838122?s=20)
+
+HuggingFace: [https://huggingface.co/papers/2604.10333](https://huggingface.co/papers/2604.10333)
+
+GitHub: [https://github.com/awwkl/ZWM](https://github.com/awwkl/ZWM)",213,announcement,,True
+1ornns5,[D] Why TPUs are not as famous as GPUs,"I have been doing some research and I found out that TPUs are much cheaper than GPUs and apparently they are made for machine learning tasks, so why are google and TPUs not having the same hype as GPUs and NVIDIA.",214,discussion,,True
+1popuf4,[P] Eigenvalues as models,"Sutskever said mane things in his recent interview, but one that caught me was that neurons should probably do much more compute than they do now. Since my own background is in optimization, I thought - why not solve a small optimization problem in one neuron?
+
+Eigenvalues have this almost miraculous property that they are solutions to nonconvex quadratic optimization problems, but we can also reliably and quickly compute them. So I try to explore them more in a blog post series I started. 
+
+Here is the first post: https://alexshtf.github.io/2025/12/16/Spectrum.html
+I hope you have fun reading.",210,announcement,,True
+1ophthe,Reasoning models don't degrade gracefully - they hit a complexity cliff and collapse entirely [Research Analysis] [R],"I analyzed 18 recent papers on reasoning model limitations and found something disturbing: these models don't fail gracefully like humans do. They maintain high performance right up to a complexity threshold, then collapse entirely.
+
+**Key findings:**
+
+\- **The cliff is real**: Models solving 10-step reasoning chains at 85% accuracy don't gradually degrade. They maintain that 85% until around step 12, then plummet to near-random guessing by step 15.
+
+\- **Composition breaks catastrophically**: A model with 90% math accuracy and 85% commonsense accuracy drops to 55% when doing both together. They don't combine capabilities - they fragment them.
+
+\- **Chain-of-thought can hurt**: In medical diagnosis tasks, 86.3% of models performed \*worse\* with CoT prompting. They talk themselves out of correct answers.
+
+\- **Scaling inference compute doesn't help**: The Quiet-STaR approach spent $200 per query for 32% accuracy on complex reasoning. Humans: similar accuracy, 30 seconds, free.
+
+**The p",209,analysis,,True
+1nfav96,[D] Larry Ellison: “Inference is where the money is going to be made.”,"In Oracle’s recent call, Larry Ellison said something that caught my attention:
+
+“All this money we’re spending on training is going to be translated into products that are sold — which is all inferencing. There’s a huge amount of demand for inferencing… We think we’re better positioned than anybody to take advantage of it.”
+
+It’s striking to see a major industry figure frame inference as the real revenue driver, not training. Feels like a shift in narrative: less about who can train the biggest model, and more about who can serve it efficiently, reliably, and at scale.
+
+Not sure if the industry is really moving in this direction? Or will training still dominate the economics for years to come?",207,analysis,,True
+1ltejq6,[D] Remembering Felix Hill and the pressure of doing AI research,"Before he left our world by a few days around Oct 2024, I showed Felix Hill an essay I had written about my time in graduate school doing NLP circa 2017-2019.
+
+He encouraged me to share it publicly saying, “It looks good and makes a lot of sense..if you post it it will surely help you and others”
+
+I didn’t have the courage to post about such a personal experience. But as Dostoyevsky would say “much unhappiness has come into the world because of bewilderment and things left unsaid.”
+
+The article garnered the attention of Jeff Dean and he echoed similar feedback.
+
+Here is the article:
+
+https://medium.com/@tahaymerghani/the-dark-side-of-academia-mental-health-mentorship-and-the-unspoken-struggles-of-an-nlp-c25adbd9a2e6
+
+If it resonates, i’m happy to chat. You’ll find a way to reach me.",207,discussion,,True
+1mtfikh,[D] Conferences need to find better venues,"Better = venues that are virtually accessible for any researcher/author to go to.
+
+Just this morning, I'm denied the U.S. B1 visa. I'm supposed to present my work at ICCV 2025 in Hawaii. And during my in-person interview, the Visa Officer did not even bother to ask for the invitation letter.
+
+This really blows cause it's supposed to be my first time and I was so excited about attending it. Would love to hear your thoughts about this.",208,analysis,,True
+1q3rxa3,[D] My Machine learning research notes: 15 years of continuous writing and 8.8k GitHub stars!,"My ML research notes are continuously updated to cover both theory and implementation. I chose this format because writing a book for Machine Learning no longer makes sense; a dynamic, evolving resource is the only way to keep up with the industry.
+
+Check it out here: [https://github.com/roboticcam/machine-learning-notes](https://github.com/roboticcam/machine-learning-notes)",205,announcement,,True
+1nomagf,[D]: How do you actually land a research scientist intern role at a top lab/company?!,"I’ve been wondering about this for a while and would love some perspective. I’m a PhD student with publications in top-tier venues (ECCV, NeurIPS, ICCV, AAAI, ICASSP), and I like to believe my research profile is solid? But when it comes to securing a research scientist internship at a big company (FAANG, top labs, etc.), I feel like I’m missing some piece of the puzzle.
+
+Is there some hidden strategy beyond just applying online? Do these roles mostly happen through networking, advisor connections, or referrals? Or is it about aligning your work super closely with the team’s current projects?
+
+I’m genuinely confused. If anyone has gone through the process or has tips on what recruiters/hiring managers actually look for, I’d really appreciate hearing your advice or dm if you wanna discuss hahahaha",202,discussion,,True
+1n1wm8n,[N] Unprecedented number of submissions at AAAI 2026,"And 20K out of 29K submissions are from China (clearly dominating AI research now, well done to my Chinese friends). The review process at AI conferences isn't just broken - it's nuked. We need change, fast.
+
+https://preview.redd.it/ih3vliracnlf1.png?width=1938&amp;format=png&amp;auto=webp&amp;s=b7112a3e5e78ec7bcd0e6b100b5887a880fb82be",202,announcement,,True
+1nie5rl,[D] - NeurIPS 2025 Decisions,Just posting this thread here in anticipation of the bloodbath due in the next 2 days.,200,discussion,,True
+1px1agd,[D] r/MachineLearning - a year in review,"This is a review of most upvoted posts on this sub in 2025, loosely grouped into high-level themes. Many important news will be missing, however that is indicative of discussion lying elsewhere at that time. I hope that you'll find it informative.
+
+---
+
+## Open-Source Parity and Training Efficiency
+
+The year began with excitement about frontier models becoming accessible. [DeepSeek R1 and its open-source distillations dominated discussion](https://www.reddit.com/r/MachineLearning/comments/1i9xwbr/r_learn_how_to_run_deepseekr1_locally_a_free/) (386 upvotes, by u/Brief-Zucchini-180), though users noted that locally-runnable versions were distilled models (8B or 32B) rather than the full 671B version, performing at roughly GPT-3.5 level. The broader story was [DeepSeek's decision to open-source](https://www.reddit.com/r/MachineLearning/comments/1ib2vtx/d_why_did_deepseek_opensource_their_work/) (965 upvotes, by u/we_are_mammals), despite reportedly achieving 45x training efficiency gains.",197,analysis,,True
+1sjb0qi,Gary Marcus on the Claude Code leak [D],"Gary Marcus just tweeted:
+
+&gt;... the way Anthropic built that kernel is straight out of classical symbolic AI.  For example, it is in large part a big IF-THEN conditional, with 486 branch points and 12 levels of nesting — all inside a deterministic, symbolic loop that the real godfathers of AI, people like John McCarthy and Marvin Minsky and Herb Simon, would have instantly recognized
+
+I've read my share of classical AI books, but I cannot say that 486 branch points and 12 levels of nesting make me think of any classical AI algorithm. (They make me think of a giant ball of mud that grew more ""special cases"" over time). Anyways, what is he talking about? ",199,analysis,,True
+1repn7v,[D] ML Engineers — How did you actually learn PyTorch? I keep forgetting everything.,"Hey everyone,
+
+I’m trying to get better at PyTorch, but I keep running into the same problem — I learn something, don’t use it for a while, and then forget most of it. Every time I come back, it feels like I’m starting from scratch again.
+
+For those of you working as ML Engineers (or using PyTorch regularly):
+
+How did you really learn PyTorch?
+
+Did you go through full documentation, courses, or just learn by building projects?
+
+What parts should I focus on to be industry-ready?
+
+Do you still look things up often, or does it become second nature over time?
+
+Any tips to make the knowledge stick long-term?",197,discussion,,True
+1rx201a,[D] ICML rejects papers of reviewers who used LLMs despite agreeing not to,"According to multiple posts on Twitter/X ICML has rejected all paper of reviewers who used LLMs for their reviews even though they chose the review track with no LLM use. What are your thoughts on this? Too harsh considering the limited precision of AI detection tools?
+
+It is the first time I see a major conferences taking harsh actions on LLM-generated reviews.
+
+https://preview.redd.it/trkb82lumspg1.png?width=1205&amp;format=png&amp;auto=webp&amp;s=03953ce11b9803cf35dd7fe83428e4187f8c4092
+
+",198,analysis,,True
+1pcgmma,[D] On low quality reviews at ML conferences,"Lately I've been really worried about a trend in the ML community: the overwhelming dominance of *purely empirical* researchers. It’s genuinely hard to be a rigorous scientist, someone who backs up arguments with theory **and** careful empirical validation. It’s much easier to throw together a bunch of empirical tricks, tune hyperparameters, and chase a +0.5% SOTA bump.
+
+To be clear: I *value* empiricism. We absolutely need strong empirical researchers. But the problem is the imbalance. They're becoming the majority voice in spaces where rigor should matter most especially NeurIPS and ICLR. These aren't ACL or CVPR, where incremental benchmark improvements are more culturally accepted. These are supposed to be venues for actual scientific progress, not just leaderboard shuffling.
+
+And the review quality really reflects this imbalance.
+
+This year I submitted to NeurIPS, ICLR, and AISTATS. The difference was extereme. My AISTATS paper was the most difficult to read, theory-heavy, yet 3 o",194,analysis,,True
+1t5anla,Stop letting LLMs edit your .bib [D],"It’s shocking how frequently I notice hallucinated citations. For citations of my own papers, I’ve seen 5 in the past couple of months, where the the title is correct but the author list is wrong. When I email the author to let them know, they always blame an LLM for hallucinating. 
+
+Is it really that hard to populate the .bib yourself? If you have any respect for research, is it not a basic requirement to make sure you correctly cite the prior literature? I feel there should be harsher penalties for these hallucinated citations.
+
+Are others experiencing the same?",196,analysis,,True
+1otlqqv,[D] ICLR 2026 Paper Reviews Discussion,"ICLR 2026 reviews go live on OpenReview tomorrow! Thought l'd open a thread for any feedback, issues, or celebrations around the reviews.
+
+Use this thread for feedback, issues, and wins. Review noise happens scores ≠ impact. Share your experience and let’s support each other.",191,discussion,,True
+1sml5fo,Failure to Reproduce Modern Paper Claims [D],"I have tried to reproduce paper claims that are feasible for me to check. This year, out of 7 checked claims, 4 were irreproducible, with 2 having active unresolved issues on Github. This really makes me question the current state of research.",187,analysis,,True
+1syjlc2,Why isn’t LLM reasoning done in vector space instead of natural language?[D],"**Why don’t LLMs use explicit vector-based reasoning instead of language-based chain-of-thought? What would happen if they did?**
+
+Most LLM reasoning we see is expressed through language: step-by-step text, explanations, chain-of-thought style outputs, etc. But internally, models already operate on high-dimensional vectors.
+
+So my question is:
+
+Why don’t we have models that reason more explicitly in latent/vector space instead of producing intermediate reasoning in natural language?
+
+Would vector-based reasoning be faster, more compressed, and better for intuition-like tasks? Or would it make reasoning too opaque, hard to verify, and unreliable for math/programming/legal logic?
+
+In other words:
+
+Could an LLM “think” in vectors and only translate the final reasoning into language at the end?
+
+Curious how researchers/engineers think about this.",185,discussion,,True
+1s0qi41,[N] MIT Flow Matching and Diffusion Lecture 2026,"Peter Holderrieth and Ezra Erives just released their new MIT 2026 course on flow matching and diffusion models! It introduces the full stack of modern AI image, video, protein generators - theory &amp; practice. It includes:
+
+* Lecture Videos: Introducing theory &amp; step-by-step derivations.
+* Lecture Notes: Mathematically self-contained.  
+* Coding: Hands-on exercises for every component.  
+
+They improved upon last years' iteration and added new topics:   
+Latent spaces, diffusion transformers, building language models with discrete diffusion models.  
+
+Everything is available here: https://diffusion.csail.mit.edu
+
+Original tweet by @peholderrieth: https://x.com/peholderrieth/status/2034274122763542953  
+Lecture notes: https://arxiv.org/abs/2506.02070  
+
+Additional resources:  
+
+* Flow Matching Guide and Code by Yaron Lipman, Marton Havasi, Peter Holderrieth, et al. https://arxiv.org/pdf/2412.06264  
+* Reference implementation by Meta https://github.com/facebookresearch/flow_matchi",187,announcement,,True
+1rs56wa,CVPR workshop farming citations - how is this ethical?? [D],"I cam across the PHAROS-AIF-MIH workshop at CVPR 2026 and one of the condition to participate in their challenge is to cite 13 papers by the challenge organizer and they are not related to the challenge. 13! 13 papers! And that too with multiple authors. And it is mandatory to upload your paper to arxiv to be eligible for this competition.
+
+Citing 13 non-related papers and uploading paper to arxiv. Isn't it clearly citation farming attempt by organizers? And it will be not a small number, it will be close to a thousand.
+
+I'm not sure how things work, but this is not what we all expect from a CVPR competition. Can we do something to flag this? We can't let this slide, can we?",187,analysis,,True
+1ov7qs2,[D] &lt;ICLR review comment&gt; Is this real?,"https://preview.redd.it/s49lfluvdu0g1.png?width=1179&amp;format=png&amp;auto=webp&amp;s=ee4a90975f2accef9c884bdea8900214a039483a
+
+",185,discussion,,True
+1p8qru0,[D] ICLR reviewers being doxed on OpenReview,"A quick warning to everyone: we've just found out that we were doxed by a public comment as reviewers. [Someone](https://openreview.net/profile?id=~OpenReviewers1) posted a public comment using a burner account that doxed our name because we rejected the paper we reviewed.
+
+Please check any paper that you reviewed to see if you are doxed, especially if you gave a low score. If you have been doxed, immediately contact your AC via OpenReview and the PC via email at program-chairs\[at\]iclr.cc.
+
+P.S. I will, of course, not share the page, since I do not want to dox myself.
+
+  
+UPDATE: The public comment has been removed; however, please be aware that new ones may be posted.",181,analysis,,True
+1ou77gn,[R] Unvalidated Trust: Cross-Stage Vulnerabilities in LLMs,"I found in another reddit forum a research paper that is interesting. It shows that LLMs handle output data not neutrally and that it's possible to execute commands. The author shows over 35 ways to do it, that's scary for everyone using LLMs in automated workflows or for Tool calls. I never thought the LLMs were so susceptible to semantics.
+
+Also, he shows a way that you can execute commands just based on the form of the prompt or use a ""prompt shell"" to hijack the context in LLMs. There is also a way to bypass the CoT monitoring that jailbreaks the LLM.
+
+I reconstructed some patterns on an offline model and I must say it worked, but the output code was not useful.
+
+  
+Here the paper: [https://arxiv.org/abs/2510.27190](https://arxiv.org/abs/2510.27190)",183,announcement,,True
+1luvynh,Favorite ML paper of 2024? [D],What were the most interesting or important papers of 2024?,180,discussion,,True
+1ng6dsf,[D] which papers HAVEN'T stood the test of time?,"As in title! Papers that were released to lots of fanfare but haven't stayed in the zeitgeist also apply. 
+
+Less so ""didn't stand the test of time"" but I'm thinking of KANs. Having said that, it could also be that I don't work in that area, so I don't see it and followup works. I might be totally off the mark here so feel free to say otherwise ",178,discussion,,True
+1q72bd8,[D] I summarized my 4-year PhD on Geometric Deep Learning for Molecular Design into 3 research questions,"I recently defended my PhD thesis at Cambridge and wrote a blog post reflecting on the journey. The thesis focuses on Geometric Deep Learning and moves from pure theory to wet-lab applications.
+
+I broke the research down into three main questions:
+
+1. **Expressivity:** How do we characterize the power of 3D representations? (Introducing the Geometric Weisfeiler-Leman Test).
+2. **Generative Modelling:** Can we build unified models for periodic and non-periodic systems? (Proposing the All-atom Diffusion Transformer).
+3. **Real-world Design:** Can generative AI actually design functional RNA? (Developing gRNAde and validating it with wet-lab experiments).
+
+It covers the transition from working on graph isomorphism problems to training large diffusion models and finally collaborating with biologists to test our designs in vitro.
+
+Full post here if you're interested: [https://chaitjo.substack.com/p/phd-thesis-in-three-questions](https://chaitjo.substack.com/p/phd-thesis-in-three-questions)
+",176,announcement,,True
+1od3j63,[N] Pondering how many of the papers at AI conferences are just AI generated garbage.,"[https://www.scmp.com/tech/tech-trends/article/3328966/ai-powered-fraud-chinese-paper-mills-are-mass-producing-fake-academic-research](https://www.scmp.com/tech/tech-trends/article/3328966/ai-powered-fraud-chinese-paper-mills-are-mass-producing-fake-academic-research)
+
+A new CCTV investigation found that paper mills in mainland China are using generative AI to mass-produce forged scientific papers, with some workers reportedly “writing” more than 30 academic articles per week using chatbots.  
+  
+These operations advertise on e-commerce and social media platforms as “academic editing” services. Behind the scenes, they use AI to fabricate data, text, and figures, selling co-authorships and ghostwritten papers for a few hundred to several thousand dollars each.  
+  
+One agency processed over 40,000 orders a year, with workers forging papers far beyond their expertise. A follow-up commentary in The Beijing News noted that “various AI tools now work together, some for thinking, others for ",175,analysis,,True
+1rlnwsk,[D] AMA Secure version of OpenClaw,"There’s a major risk that OpenClaw will exploit your data and funds. So I built a security focused version in Rust. AMA.
+
+I was incredibly excited when OpenClaw came out. It feels like the tech I’ve wanted to exist for 20 years. When I was 14 and training for programming competitions, I first had the question: why can’t a computer write this code? I went on to university to study ML, worked on natural language research at Google, co-wrote “Attention Is All You Need,” and founded NEAR, always thinking about and building towards this idea. Now it’s here, and it’s amazing. It already changed how I interact with computing. 
+
+Having a personal AI agent that acts on your behalf is great. What is not great is that it’s incredibly insecure – you’re giving total access to your entire machine. (Or setting up a whole new machine, which costs time and money.) There is a major risk of your Claw leaking your credentials, data, getting prompt-injected, or compromising your funds to a third party. 
+
+I",178,announcement,,True
+1t06564,Chinese nexus/network in A* conferences rejecting non chinese papers [D],"Recently lot of people are coming forward that chinese have strong network and are doing nepotism and supporting each other through a well known mobile app they use. if true this is big, I also encountered this issue in IJCAI 26. Please share if you have faced this issue before
+
+  
+ex in my case : the reviewer was angry because i didnt cite a paper, whose main author was also chinese.",174,analysis,,True
+1s0hcit,[D] Has industry effectively killed off academic machine learning research in 2026?,"This wasn't always the case, but now almost any research topic in machine learning that you can imagine is now being done MUCH BETTER in industry due to a glut of compute and endless international talents.
+
+The only ones left in academia seems to be:
+
+1. niche research that delves very deeply into how some older models work (e.g., GAN, spiking NN), knowing full-well they will never see the light of day in actual applications, because those very applications are being done better by whatever industry is throwing billions at.
+2. some crazy scenario that basically would never happen in real-life (all research ever done on white-box adversarial attack for instance (or any-box, tbh), there are tens of thousands).
+3. straight-up misapplication of ML, especially for applications requiring actual domain expertise like flying a jet plane.
+4. surveys of models coming out of industry, which by the time it gets out, the models are already depreciated and basically non-existent. In other words, ML ",175,analysis,,True
+1q2wiub,[D] Google DeepMind Research Engineer/Scientist Interview Prep Advice?,"Hey everyone,
+
+I'm currently an Applied Scientist II at Amazon working primarily with LLMs (in the speech domain, but open to other areas), and I'm considering applying to Google DeepMind for either Research Engineer or Research Scientist roles.
+
+For context on my background:
+
+* AS II level at Amazon
+* I do not have PhD, but 3+ years of experience
+
+I'd love to hear from anyone who has:
+
+1. Interviewed at DeepMind (especially for RE or RS roles) - what should I focus on preparing?
+2. Insight on RE vs RS roles - which might be a better fit given my background?
+
+Specific questions:
+
+* How much does the interview focus on novel research ideas vs. implementation/systems knowledge?
+* Are there particular areas in LLMs/deep learning I should deep-dive on?
+* How important is having a strong publication record for RE or RS roles?
+* Final and most important question, how do I even get the interview? ",174,discussion,,True
+1sa3cf0,Stanford CS 25 Transformers Course (OPEN TO ALL | Starts Tomorrow),"**Tl;dr: One of Stanford's hottest AI seminar courses. We open the course to the public. Lectures start tomorrow (Thursdays), 4:30-5:50pm PDT, at Skilling Auditorium and** **Zoom****. Talks will be** [recorded](https://web.stanford.edu/class/cs25/recordings/)**. Course website:** [**https://web.stanford.edu/class/cs25/**](https://web.stanford.edu/class/cs25/)**.**
+
+Interested in Transformers, the deep learning model that has taken the world by storm? Want to have intimate discussions with researchers? If so, this course is for you!
+
+Each week, we invite folks at the forefront of Transformers research to discuss the latest breakthroughs, from LLM architectures like GPT and Gemini to creative use cases in generating art (e.g. DALL-E and Sora), biology and neuroscience applications, robotics, and more!
+
+CS25 has become one of Stanford's hottest AI courses. We invite the coolest speakers such as **Andrej Karpathy, Geoffrey Hinton, Jim Fan, Ashish Vaswani**, and folks from **OpenAI, Anthrop",174,announcement,,True
+1qmhyin,[D] ICML 2026 - ICML desk-rejected my paper but kept me on as a reviewer. Wow?,"As the title says, I admire the sheer audacity of the ICML committee. My paper gets desk-rejected, so technically I’m not part of the conference… and yet they’ve assigned me as a continued reviewer. Truly inspiring.
+
+Rejected as an author, retained as unpaid labor. Academia really said: you don’t belong here, but your service does.
+
+At this point, I assume my role is to review LLM-generated papers and reflect on my life choices.",169,analysis,,True
+1t0mct7,Is it just me or is the Conference Lottery culture killing research? [D],"I need to vent before I completely burn out. My supervisor has started treating major conferences like weekend hackathons, and I'm losing my mind. We are told to come up with something to submit roughly two weeks before the deadline, and he doesn't even care if it gets rejected. Apparently, the **experience of trying** is the goal.  
+  
+It's no wonder top-tier conferences receive tens of thousands of submissions. and I hate my life.",173,analysis,,True
+hiv3vf,[D] The machine learning community has a toxicity problem,"It is omnipresent!
+
+**First** of all, the peer-review process is *broken*. Every fourth NeurIPS submission is put on arXiv. There are DeepMind researchers publicly going after reviewers who are criticizing their ICLR submission. On top of that, papers by well-known institutes that were put on arXiv are accepted at top conferences, despite the reviewers agreeing on rejection. In contrast, vice versa, some papers with a majority of accepts are overruled by the AC. (I don't want to call any names, just have a look the openreview page of this year's ICRL).
+
+**Secondly,** there is a *reproducibility crisis*. Tuning hyperparameters on the test set seem to be the standard practice nowadays. Papers that do not beat the current state-of-the-art method have a zero chance of getting accepted at a good conference. As a result, hyperparameters get tuned and subtle tricks implemented to observe a gain in performance where there isn't any.
+
+**Thirdly,** there is a *worshiping* problem. Every paper wi",3927,analysis,,True
+11sboh1,[D] Our community must get serious about opposing OpenAI,"OpenAI was founded for the explicit purpose of democratizing access to AI and acting as a counterbalance to the closed off world of big tech by developing open source tools.
+
+They have abandoned this idea entirely.
+
+Today, with the release of GPT4 and their direct statement that they will not release details of the model creation due to ""safety concerns"" and the competitive environment, they have created a precedent worse than those that existed before they entered the field. We're at risk now of other major players, who previously at least published their work and contributed to open source tools, close themselves off as well.
+
+AI alignment is a serious issue that we definitely have not solved. Its a huge field with a dizzying array of ideas, beliefs and approaches. We're talking about trying to capture the interests and goals of all humanity, after all. In this space, the one approach that is horrifying (and the one that OpenAI was LITERALLY created to prevent) is a singular or oliga",3067,analysis,,True
+5z8110,[D] A Super Harsh Guide to Machine Learning,"First, read fucking Hastie, Tibshirani, and whoever. Chapters 1-4 and 7-8. If you don't understand it, keep reading it until you do. 
+
+You can read the rest of the book if you want. You probably should, but I'll assume you know all of it. 
+
+Take Andrew Ng's Coursera. Do all the exercises in python and R. Make sure you get the same answers with all of them. 
+
+Now forget all of that and read the deep learning book. Put tensorflow and pytorch on a Linux box and run examples until you get it. Do stuff with CNNs and RNNs and just feed forward NNs.
+
+Once you do all of that, go on arXiv and read the most recent useful papers. The literature changes every few months, so keep up. 
+
+There. Now you can probably be hired most places. If you need resume filler, so some Kaggle competitions. If you have debugging questions, use StackOverflow. If you have math questions, read more. If you have life questions, I have no idea.",2698,announcement,,True
+14265di,Should r/MachineLearning join the reddit blackout to protest changes to their API?,"Hello there, r/MachineLearning,
+
+Recently, Reddit has announced some [changes to their API](https://www.reddit.com/r/modnews/comments/13wshdp/api_update_continued_access_to_our_api_for/) that may have pretty serious impact on many of it's users.
+
+[You may have already seen quite a few posts like these](https://www.reddit.com/r/ModCoord/comments/1401qw5/incomplete_and_growing_list_of_participating/) across some of the other subreddits that you browse, so we're just going to cut to the chase.
+
+# What's Happening
+
+Third Party Reddit apps (such as Apollo, Reddit is Fun and others) are going to become ludicrously more expensive for it's developers to run, which will in turn either kill the apps, or result in a monthly fee to the users if they choose to use one of those apps to browse. Put simply, each request to Reddit within these mobile apps will cost the developer money. The developers of Apollo [were quoted around $2 million per month](https://www.reddit.com/r/apolloapp/comments/13ws4w3",2624,discussion,,True
+dh2xfs,[D] Siraj has a new paper: 'The Neural Qubit'. It's plagiarised,"Exposed in this Twitter thread: https://twitter.com/AndrewM_Webb/status/1183150368945049605
+
+Text, figures, tables, captions, equations (even equation numbers) are all lifted from another paper with minimal changes.
+
+Siraj's paper: http://vixra.org/pdf/1909.0060v1.pdf
+
+The original paper: https://arxiv.org/pdf/1806.06871.pdf
+
+Edit: I've chosen to expose this publicly because he has a lot of fans and currently a lot of paying customers. They really trust this guy, and I don't think he's going to change.",2576,analysis,,True
+p6hsoh,"[P] AppleNeuralHash2ONNX: Reverse-Engineered Apple NeuralHash, in ONNX and Python","As you may already know Apple is going to implement NeuralHash algorithm for on-device [CSAM detection](https://www.apple.com/child-safety/pdf/CSAM_Detection_Technical_Summary.pdf) soon. Believe it or not, this algorithm already exists as early as iOS 14.3, hidden under obfuscated class names. After some digging and reverse engineering on the hidden APIs I managed to export its model (which is MobileNetV3) to ONNX and rebuild the whole NeuralHash algorithm in Python. You can now try NeuralHash even on Linux!
+
+Source code: [https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX](https://github.com/AsuharietYgvar/AppleNeuralHash2ONNX)
+
+No pre-exported model file will be provided here for obvious reasons. But it's very easy to export one yourself following the guide I included with the repo above. You don't even need any Apple devices to do it.
+
+Early tests show that it can tolerate image resizing and compression, but not cropping or rotations.
+
+Hope this will help us understand NeuralHas",1736,announcement,,True
+uyratt,"[D] I don't really trust papers out of ""Top Labs"" anymore","I mean, I trust that the numbers they got are accurate and that they really did the work and got the results. I believe those. It's just that, take the recent ""An Evolutionary Approach to Dynamic Introduction of Tasks in Large-scale Multitask Learning Systems"" paper. It's 18 pages of talking through this pretty convoluted evolutionary and multitask learning algorithm, it's pretty interesting, solves a bunch of problems. But two notes. 
+
+One, the big number they cite as the success metric is 99.43 on CIFAR-10, against a SotA of 99.40, so woop-de-fucking-doo in the grand scheme of things.
+
+Two, there's a chart towards the end of the paper that details how many TPU core-hours were used for just the training regimens that results in the final results. The sum total is 17,810 core-hours. Let's assume that for someone who doesn't work at Google, you'd have to use on-demand pricing of $3.22/hr. This means that these trained models cost $57,348. 
+
+Strictly speaking, throwing enough compute at ",1696,analysis,,True
+6l2esd,[D] Why can't you guys comment your fucking code?,"Seriously.
+
+I spent the last few years doing web app development. Dug into DL a couple months ago. Supposedly, compared to the post-post-post-docs doing AI stuff, JavaScript developers should be inbred peasants. But every project these peasants release, even a fucking library that colorizes CLI output, has a catchy name, extensive docs, shitloads of comments, fuckton of tests, semantic versioning, changelog, and, oh my god, better variable names than `ctx_h` or `lang_hs` or `fuck_you_for_trying_to_understand`.
+
+The concepts and ideas behind DL, GANs, LSTMs, CNNs, whatever – it's clear, it's simple, it's intuitive. The slog is to go through the jargon (that keeps changing beneath your feet - what's the point of using fancy words if you can't keep them consistent?), the unnecessary equations, trying to squeeze meaning from bullshit language used in papers, figuring out the super important steps, preprocessing, hyperparameters optimization that the authors, oops, failed to mention.
+
+Sorry",1663,analysis,,True
+13kfxzy,[D] Does anybody else despise OpenAI?," I  mean, don't get me started with the closed source models they have that were trained using the work of unassuming individuals who will never  see a penny for it. Put it up on Github they said. I'm all for  open-source, but when a company turns around and charges you for a  product they made with freely and publicly made content, while forbidding you from using the output to create competing models, that is where I  draw the line. It is simply ridiculous. 
+
+Sam Altman couldn't be anymore predictable with his recent attempts to get the government to start regulating AI.
+
+What  risks? The AI is just a messenger for information that is already out  there if one knows how/where to look. You don't need AI to learn how to  hack, to learn how to make weapons, etc. Fake news/propaganda? The  internet has all of that covered. LLMs are no where near the level of AI  you see in sci-fi. I mean, are people really afraid of text? Yes, I  know that text can sometimes be malicious code such as viru",1540,discussion,,True
+wiqjxv,[D] The current and future state of AI/ML is shockingly demoralizing with little hope of redemption,"I recently encountered the PaLM (Scaling Language Modeling with Pathways) paper from Google Research and it opened up a can of worms of ideas I’ve felt I’ve intuitively had for a while, but have been unable to express – and I know I can’t be the only one. Sometimes I wonder what the original pioneers of AI – Turing, Neumann, McCarthy, etc. – would think if they could see the state of AI that we’ve gotten ourselves into. 67 authors, 83 pages, 540B parameters in a model, the internals of which no one can say they comprehend with a straight face, 6144 TPUs in a commercial lab that no one has access to, on a rig that no one can afford, trained on a volume of data that a human couldn’t process in a lifetime, 1 page on ethics with the same ideas that have been rehashed over and over elsewhere with no attempt at a solution – bias, racism, malicious use, etc. – for purposes that who asked for?
+
+When I started my career as an AI/ML research engineer 2016, I was most interested in two types of t",1493,analysis,,True
+11rizyb,[D] Anyone else witnessing a panic inside NLP orgs of big tech companies?,"I'm in a big tech company working along side a science team for a product you've all probably used. We have these year long initiatives to productionalize ""state of the art NLP models"" that are now completely obsolete in the face of GPT-4. I think at first the science orgs were quiet/in denial. But now it's very obvious we are basically working on worthless technology. And by ""we"", I mean a large organization with scores of teams. 
+
+Anyone else seeing this? What is the long term effect on science careers that get disrupted like this? Whats even more odd is the ego's of some of these science people
+
+Clearly the model is not a catch all, but still",1385,analysis,,True
+d7ad2y,"[D] Siraj Raval - Potentially exploiting students, banning students asking for refund. Thoughts?","I'm not a personal follower of Siraj, but this issue came up in a ML FBook group that I'm part of. I'm curious to hear what you all think.
+
+It appears that Siraj recently offered a course ""Make Money with Machine Learning"" with a registration fee but did not follow through with promises made in the initial offering of the course. On top of that, he created a refund and warranty page with information regarding the course *after* people already paid. Here is a link to a WayBackMachine captures of u/klarken's documentation of Siraj's potential misdeeds: [case for a refund](https://web.archive.org/save/https://case-for-a-refund.s3.us-east-2.amazonaws.com/feedback.html), [discussion in course Discord](https://web.archive.org/web/20190923211614/https://case-for-a-refund.s3.us-east-2.amazonaws.com/reference_messages.png), [\~1200 individuals in the course](https://web.archive.org/web/20190923211815/https://case-for-a-refund.s3.us-east-2.amazonaws.com/members.png), [Multiple Slack channel disc",1358,discussion,,True
+14kv1ym,"So long r/MachineLearning, it's been an interesting few years","Some of you may recognize me, most of you probably don't. I've been the most active moderator of r/MachineLearning for a few years now, but on June 30th I'll be deleting my Reddit account.
+
+I pretty much exclusively used Apollo to moderate. It would notify me of any new post, which allowed me to moderate from anywhere, anytime. That's how I stayed on top of moderating such a large sub.
+
+When I stepped back on my moderation efforts a few months ago, [the effects](https://old.reddit.com/r/MachineLearning/comments/110swn2/d_quality_of_posts_in_this_sub_going_down) were quite apparent to [many of you](https://old.reddit.com/r/MachineLearning/comments/115ez2r/deleted_by_user).
+
+Of course, this is the internet, and each of you have your own subjective view on moderation. Just know that it is a very time consuming task that I did for free because I genuinely cared about the community.
+
+If you want to join me, I'll be moving on to kbin where I'm a moderator for [m/machinelearning](https://kbin",1325,discussion,,True
+k3ygrc,[R] AlphaFold 2,"Seems like DeepMind just caused the ImageNet moment for protein folding.
+
+Blog post isn't that deeply informative yet (paper is promised to appear soonish). Seems like the improvement over the first version of AlphaFold is mostly usage of transformer/attention mechanisms applied to residue space and combining it with the working ideas from the first version. Compute budget is surprisingly moderate given how crazy the results are. Exciting times for people working in the intersection of molecular sciences and ML :)
+
+Tweet by Mohammed AlQuraishi (well-known domain expert)  
+[https://twitter.com/MoAlQuraishi/status/1333383634649313280](https://twitter.com/MoAlQuraishi/status/1333383634649313280)
+
+DeepMind BlogPost  
+[https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology](https://deepmind.com/blog/article/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology)  
+
+
+UPDATE:   
+Nature published a comment on it as well  
+[https://www.natur",1323,announcement,,True
+4w6tsv,AMA: We are the Google Brain team. We'd love to answer your questions about machine learning.,"We’re a group of research scientists and engineers that work on the [Google Brain team](http://g.co/brain).  Our group’s mission is to make intelligent machines, and to use them to improve people’s lives.  For the last five years, we’ve conducted research and built systems to advance this mission.
+
+We disseminate our work in multiple ways:
+
+* By publishing papers about our research (see [publication list](https://research.google.com/pubs/BrainTeam.html))
+* By building and open-sourcing software systems like TensorFlow (see [tensorflow.org](http://tensorflow.org) and [https://github.com/tensorflow/tensorflow](https://github.com/tensorflow/tensorflow))
+* By working with other teams at Google and Alphabet to get our work into the hands of billions of people (some examples: [RankBrain for Google Search](https://en.wikipedia.org/wiki/RankBrain), [SmartReply for GMail](https://research.googleblog.com/2015/11/computer-respond-to-this-email.html), [Google Photos](https://research.googleblog.co",1308,discussion,,True
+eesoav,"[N] 4 Months after Siraj was caught scamming he has still not refunded any victims based in India, Philippines, or any other countries with no legal recourse. He makes an apology video, and when his victims ask for their refund, his followers respond with ""Be kind. He's asking for your forgiveness""","This is fucking sick..
+
+People based in India, the Philippines, and other countries that do not have the resources to go after Siraj legally are those who need the money the most. 200$ could be a months worth of salary, or several months. And the types of people who get caught up in the scams are those who genuinely looking to improve their financial situation and work hard for it. This is fucking **cruel**. 
+
+I'm having a hard time believing Siraj's followers are that brainwashed. Most likely alt accounts controlled by Siraj.
+
+https://i.imgur.com/6cUhQDO.png
+
+https://i.imgur.com/TDx5ELA.png",1288,analysis,,True
+12nbixk,[P] OpenAssistant - The world's largest open-source replication of ChatGPT,"We’re excited to announce the release of OpenAssistant.
+
+The future of AI development depends heavily on high quality datasets and models being made publicly available, and that’s exactly what this project does.
+
+Watch the annoucement video:
+
+[https://youtu.be/ddG2fM9i4Kk](https://youtu.be/ddG2fM9i4Kk)
+
+&amp;#x200B;
+
+Our team has worked tirelessly over the past several months collecting large amounts of text-based input and feedback to create an incredibly diverse and unique dataset designed specifically for training language models or other AI applications.
+
+With over 600k human-generated data points covering a wide range of topics and styles of writing, our dataset will be an invaluable tool for any developer looking to create state-of-the-art instruction models!
+
+To make things even better, we are making this entire dataset free and accessible to all who wish to use it. Check it out today at our HF org: OpenAssistant
+
+On top of that, we've trained very powerful models that you can t",1270,announcement,,True
+1ucy7p3,Syntactically robust NLI for semantics of imperfectly generated text? [R],"Hi all,
+
+I'm looking for literature on relatively specific tooling. 
+
+In autoregressive LLMs, there is substantial published work that used NLI on sub-claims produced by LLMs to gauge correctness of LLM answers. 
+
+In diffusion (or D-) LLMs, the SoTA model generations that I see (outside of perhaps LLaDA) seem to struggle to be as correct syntactically as the generations from premier AR LLMs, in addition to the issue of semantic correctness.
+
+My intuition is that this complicates the usage of NLI (the syntactic noise). 
+
+What is the SoTA on syntax-robust NLI?",2,discussion,,True
+1ucuohi,Recommendations for speech annotation tools [D],I'm looking for human-in-the-loop platforms that allow you to automatically transcribe audio followed by manually fixing the transcriptions and fine tuning the model. Is there a local (not an online service) installable platform for doing this?,2,discussion,,True
+1ud0rft,Non-deterministic Vulnerability Detection Benchmark System [P],"I work in firmware adjacent to AI, so not an ML guy exactly, so that's why I've come here. For work we got a bit concerned about Mythos and all the hype made me explore some benchmarking work. I now have this pretty cool benchmark that's about 80% done sitting around and haven't had the time to polish it up and show it off.
+
+I was hoping some more AI focused people could check it out, tell me if it's duplicate work, or if it is worth putting some time into and finishing. Also happy for some help too. 
+
+The rundown of the code is that it is Juliet code that's been ""hidden"" to look somewhat like a real codebase, removing LLM's natural advantage when viewing known CWEs, while preserving the ""ground truth"" associated with Juliet. I also used an LLM to inject comments into the code in accurate, misleading, or neutral sentiments, allowing the user to examine how comments and plain English data can manipulate an LLMs ability to identify a CWE. 
+
+There are a couple hundred CWEs, generally enou",1,announcement,,True
