@@ -1,5 +1,5 @@
 # TakeMeter — Planning Document
-## Milestone 1: Community, Labels, and Taxonomy
+## Fine-Tuned Text Classifier for r/MachineLearning Discourse
 
 ---
 
@@ -76,10 +76,82 @@ In r/MachineLearning, the community places high value on rigorous, evidence-base
 
 ---
 
-## Next Steps
+---
 
-- Collect 200+ labeled examples (posts from r/MachineLearning)
-- Split into train / validation / test sets
-- Fine-tune `distilbert-base-uncased` on labeled dataset
-- Compare against Groq `llama-3.3-70b-versatile` zero-shot baseline
-- Evaluate with accuracy, per-class F1, and confusion matrix
+## Data Collection Plan
+
+**Source:** Reddit r/MachineLearning via the PRAW Python library (Reddit's official API). Posts will be collected from the `top` and `hot` feeds across multiple time filters (`month`, `year`, `all`) to ensure variety across post types and time periods.
+
+**Target per label:**
+- `analysis` — 70 examples
+- `discussion` — 70 examples
+- `announcement` — 70 examples
+
+Total target: **210 examples** (buffer above the 200 minimum).
+
+**If a label is underrepresented after 200 examples:**
+`announcement` posts are the most common in this subreddit, so `analysis` is the label most likely to be underrepresented. If fewer than 60 `analysis` posts are found in the initial pull, I will search specifically for posts tagged `[D]` (Discussion) with strong upvote ratios and long text bodies, which tend to contain structured arguments. I will also extend the time filter to `all` to widen the pool.
+
+**Train / Validation / Test split:**
+- Train: 140 examples (~67%)
+- Validation: 35 examples (~17%)
+- Test: 35 examples (~17%)
+
+Split will be stratified by label to ensure all three labels are represented proportionally in each set.
+
+**CSV columns:** `id`, `title`, `text`, `score`, `label`, `split`
+
+---
+
+## Evaluation Metrics
+
+**Why accuracy alone is not enough:**
+If the label distribution is uneven (e.g., 50% `announcement`, 30% `discussion`, 20% `analysis`), a model that always predicts `announcement` would achieve 50% accuracy while being completely useless. Accuracy hides per-class failures.
+
+**Metrics I will use:**
+
+- **Overall accuracy** — baseline comparison between fine-tuned model and Groq zero-shot baseline.
+- **Per-class F1 score** — harmonic mean of precision and recall for each label. This catches cases where the model learns one label well but fails on others. F1 is especially important for `analysis`, which is likely the hardest and most underrepresented label.
+- **Confusion matrix** — shows exactly which labels are being confused with which. Expected confusion: `analysis` vs `discussion` (the hard boundary). The matrix will reveal whether the model is making the right kinds of mistakes.
+- **Macro F1** — average F1 across all three labels, weighted equally. This is the primary single-number metric for this task because the labels are roughly balanced and all three matter equally.
+
+---
+
+## Definition of Success
+
+**Minimum threshold for "good enough":**
+- Overall accuracy ≥ 70% on the test set
+- Macro F1 ≥ 0.65 across all three labels
+- No single label with F1 < 0.50 (the model must learn something about every label)
+
+**Threshold for "genuinely useful" in a real community tool:**
+- Overall accuracy ≥ 80%
+- Macro F1 ≥ 0.75
+- `analysis` F1 ≥ 0.70 specifically (this is the hardest label and most valuable to identify correctly)
+
+**Baseline comparison:**
+The fine-tuned DistilBERT must outperform the Groq `llama-3.3-70b-versatile` zero-shot baseline on macro F1. If it does not, fine-tuning has not helped and the label taxonomy or dataset quality needs revisiting.
+
+**What would indicate failure:**
+- Any label with F1 < 0.40 means the model has not learned that label at all
+- Test accuracy > 95% likely indicates label leakage or labels that are too easy — worth investigating
+- If fine-tuned model performs worse than zero-shot baseline, dataset quality is suspect
+
+---
+
+## AI Tool Plan
+
+### 1. Label Stress-Testing — YES, I will use AI for this
+Before annotating a single example, I will give Claude my three label definitions and the `analysis` vs `discussion` edge case description, and ask it to generate 10 posts that sit at the boundary between those two labels. If any generated posts cannot be cleanly classified using my decision rule, I will revise the definitions until they can be. This step happens before any labeling begins — it is the cheapest way to find holes in my taxonomy before they corrupt 200 labeled examples.
+
+### 2. Annotation Assistance — YES, with strict review
+I will use Claude to pre-label batches of 20 posts at a time by providing the label definitions and asking for a label with a one-sentence justification per post. I will then personally review every single pre-label and override any I disagree with. I am choosing to do this because labeling 200 posts manually from scratch is slow, and AI pre-labeling speeds up the process without removing my judgment — I still make every final call. In the CSV, I will add a column `prelabeled_by_ai` (True/False) to track which examples were AI-assisted, for disclosure in the final README.
+
+### 3. Failure Analysis — YES, as a pattern-finding aid
+After generating predictions on the test set, I will collect all wrong predictions and give them to Claude with the prompt: *"Here are posts my classifier got wrong. What patterns do you see? Are there systematic confusions between specific labels?"* I am choosing to do this because pattern-finding across 30+ wrong predictions is exactly the kind of task where AI adds speed without replacing judgment. I will verify every pattern Claude identifies by manually re-reading the relevant examples before writing anything up in my evaluation report. I will not report a pattern I cannot confirm myself.
+
+---
+
+## Why These Distinctions Matter
+
+In r/MachineLearning, the community places high value on rigorous, evidence-based posts. The difference between a post that argues from data versus one that just asks a question is visible and meaningful to regular members — it determines whether a post gets cited, challenged, or simply answered. These three labels capture the three dominant modes of communication in this community: arguing, asking, and sharing.
