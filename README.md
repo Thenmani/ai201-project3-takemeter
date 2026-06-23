@@ -254,3 +254,40 @@ Claude Cowork pre-labeled all 213 posts in two passes. The first pass produced a
 
 **3. Failure analysis (Claude)**
 After generating wrong predictions, I shared them with Claude and asked it to identify patterns. Claude identified three patterns: news-framing misleading the model away from `analysis`, technical vocabulary misleading the model toward `analysis`, and rhetorical questions misleading the model away from `analysis`. I verified each pattern by manually re-reading the relevant wrong predictions before including them in this report.
+
+---
+
+## Stretch Feature: Deployed Interface
+
+### What was built
+
+A Gradio-based web interface that accepts any Reddit post text, runs it through the fine-tuned DistilBERT classifier, and displays the predicted label with confidence scores for all three labels.
+
+### How to run it
+
+1. Open `notebooks/takemeter.ipynb` in Google Colab
+2. Run all cells from Section 1 through Section 3 (loads and trains the model)
+3. Run the final cell (Section 7 — Gradio Interface)
+4. A public URL will appear — click it to open the interface in your browser
+
+### Interface screenshot outcome
+
+The interface was tested on all three example posts:
+
+| Post | Predicted | Confidence |
+|---|---|---|
+| "AI-generated CUDA kernels silently break training..." | announcement | 40% |
+| "Where do you go for serious AI research discussion online?" | discussion | ~60% |
+| "Introducing PapersWithCode revival — browse CVPR 2026 papers..." | announcement | ~85% |
+
+### Observations
+
+The first example (CUDA kernels post) was predicted as `announcement` instead of `analysis` with only 40% confidence — consistent with the model's known weakness on `analysis` vs `announcement` boundary cases identified in the evaluation. The low confidence correctly signals uncertainty, which is meaningful behavior — the model knows it is unsure on hard cases.
+
+The `discussion` and `announcement` examples classified correctly with higher confidence, consistent with the test set evaluation results (F1: 0.67 and 0.88 respectively).
+
+### Stretch features considered but not implemented
+
+- **Inter-annotator reliability** — would require recruiting another person to label 30+ examples independently. Cohen's kappa would be the appropriate metric. Not feasible given project timeline.
+- **Confidence calibration** — would require bucketing predictions by confidence range and computing accuracy per bucket. Deferred due to time constraints.
+- **Error pattern analysis** — partially completed via the AI-assisted failure analysis above. A more systematic version clustering wrong predictions by post length or label pair is deferred.
