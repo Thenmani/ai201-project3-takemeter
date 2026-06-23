@@ -155,3 +155,34 @@ After generating predictions on the test set, I will collect all wrong predictio
 ## Why These Distinctions Matter
 
 In r/MachineLearning, the community places high value on rigorous, evidence-based posts. The difference between a post that argues from data versus one that just asks a question is visible and meaningful to regular members — it determines whether a post gets cited, challenged, or simply answered. These three labels capture the three dominant modes of communication in this community: arguing, asking, and sharing.
+
+---
+
+## Stretch Features Plan
+
+### Chosen Stretch Feature: Deployed Interface
+
+**What:** A simple Gradio-based web interface that accepts a Reddit post title and text, runs it through the fine-tuned DistilBERT classifier, and displays the predicted label with confidence scores for all three labels.
+
+**Why this one:** It is the most practical stretch feature given the project scope. It requires no additional data collection or labeling, directly showcases the fine-tuned model, and produces a tangible artifact that demonstrates the classifier works end-to-end. It also satisfies the "genuinely useful community tool" framing from the Definition of Success section.
+
+**Implementation plan:**
+- Use Gradio's `gr.Interface` to wrap the fine-tuned model's inference function
+- Accept raw post text as input (title + body combined)
+- Return a label distribution showing confidence for all three labels
+- Include 3 pre-filled example posts (one per label) for easy testing
+- Launch with `share=True` to generate a public URL from Colab
+- Commit the interface code as the final cell in `notebooks/takemeter.ipynb`
+- Document how to run it in the README
+
+**Success criteria for the interface:**
+- Accepts any free-form text input
+- Returns predicted label and confidence scores for all 3 labels
+- Runs without errors on the 3 provided example posts
+- Public URL accessible via Gradio's share link
+
+**Stretch features considered but not implemented:**
+
+- *Inter-annotator reliability* — would require recruiting another person to label 30+ examples independently, which is not feasible given the project timeline. Cohen's kappa would be the appropriate metric.
+- *Confidence calibration* — would require bucketing predictions by confidence range and computing accuracy per bucket. Interesting but lower priority than a working interface.
+- *Error pattern analysis* — partially completed via the AI-assisted failure analysis in the evaluation report. A more systematic version (e.g., clustering wrong predictions by post length or label pair) is deferred.
